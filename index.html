@@ -293,6 +293,205 @@
             color: #00f3ff;
             font-weight: bold;
         }
+
+        /* Login Styles */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #00f3ff;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00f3ff, #ff00ff);
+            padding: 12px 30px;
+            border-radius: 10px;
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.4);
+        }
+
+        .role-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .role-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .role-card:hover {
+            border-color: #00f3ff;
+            transform: translateY(-5px);
+        }
+
+        .role-card.selected {
+            border-color: #00f3ff;
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .role-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 12, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .dashboard-sidebar.mobile-hidden {
+            transform: translateX(-100%);
+        }
+
+        .dashboard-content {
+            margin-left: 280px;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .sidebar-menu-item {
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-menu-item:hover {
+            background: rgba(0, 243, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .sidebar-menu-item.active {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.2), rgba(255, 0, 255, 0.2));
+            border-left: 3px solid #00f3ff;
+        }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
+            border-color: #00f3ff;
+        }
+
+        .subject-card.enrolled {
+            border-color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+        }
+
+        .badge-warning {
+            background: rgba(247, 183, 49, 0.2);
+            color: #f7b731;
+        }
+
+        .badge-info {
+            background: rgba(0, 243, 255, 0.2);
+            color: #00f3ff;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-sidebar {
+                transform: translateX(-100%);
+            }
+
+            .dashboard-sidebar.mobile-visible {
+                transform: translateX(0);
+            }
+
+            .dashboard-content {
+                margin-left: 0;
+            }
+        }
+
+        .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f3ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
 <body>
@@ -304,474 +503,323 @@
     <div class="floating-shape" style="width: 400px; height: 400px; background: #4ecdc4; top: 50%; right: 10%; animation-delay: 3s;"></div>
     <div class="floating-shape" style="width: 250px; height: 250px; background: #45b7d1; bottom: 10%; left: 50%; animation-delay: 6s;"></div>
 
-    <!-- Navigation -->
-    <nav class="glass fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
-                        <i class="fas fa-graduation-cap text-2xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold">Liceo Bicentenario San Nicolás</h1>
-                        <p class="text-xs text-gray-300">Departamento de Historia y Geografía</p>
-                    </div>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container relative z-10">
+        <div class="login-card glass rounded-3xl p-8 neon-border">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 gradient-animate rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-graduation-cap text-4xl"></i>
                 </div>
-                <div class="hidden md:flex space-x-4">
-                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('home')">
-                        <i class="fas fa-home mr-2"></i>Inicio
-                    </button>
-                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('historia')">
-                        <i class="fas fa-landmark mr-2"></i>Historia
-                    </button>
-                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('geogo')">
-                        <i class="fas fa-globe mr-2"></i>Geogo
-                    </button>
-                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('geomatica')">
-                        <i class="fas fa-drone mr-2"></i>Geomática
-                    </button>
-                </div>
-                <button class="md:hidden" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
+                <h1 class="text-3xl font-bold neon-text mb-2">Bienvenido</h1>
+                <p class="text-gray-300">Liceo Bicentenario San Nicolás</p>
             </div>
-        </div>
-    </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full glass z-40 hidden">
-        <div class="flex flex-col items-center justify-center h-full space-y-6">
-            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('home'); toggleMobileMenu()">
-                <i class="fas fa-home mr-2"></i>Inicio
-            </button>
-            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('historia'); toggleMobileMenu()">
-                <i class="fas fa-landmark mr-2"></i>Historia
-            </button>
-            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('geogo'); toggleMobileMenu()">
-                <i class="fas fa-globe mr-2"></i>Geogo
-            </button>
-            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('geomatica'); toggleMobileMenu()">
-                <i class="fas fa-drone mr-2"></i>Geomática
-            </button>
+            <div class="role-selector">
+                <div class="role-card" id="studentRole" onclick="selectRole('student')">
+                    <i class="fas fa-user-graduate"></i>
+                    <p class="font-semibold">Alumno</p>
+                </div>
+                <div class="role-card" id="teacherRole" onclick="selectRole('teacher')">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <p class="font-semibold">Profesor</p>
+                </div>
+            </div>
+
+            <form onsubmit="login(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm mb-2 text-gray-300">Usuario</label>
+                    <input type="text" id="username" class="input-field" placeholder="Ingresa tu usuario" required>
+                </div>
+                <div>
+                    <label class="block text-sm mb-2 text-gray-300">Contraseña</label>
+                    <input type="password" id="password" class="input-field" placeholder="Ingresa tu contraseña" required>
+                </div>
+                <button type="submit" class="btn-primary mt-6">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Iniciar Sesión
+                </button>
+            </form>
+
+            <p class="text-center text-sm text-gray-400 mt-6">
+                Demo: usa cualquier usuario/contraseña
+            </p>
         </div>
     </div>
 
-    <div class="relative z-10 pt-24">
-        <!-- Home Section -->
-        <section id="home" class="min-h-screen flex items-center justify-center px-6">
-            <div class="container mx-auto text-center">
-                <div class="glass rounded-3xl p-12 max-w-5xl mx-auto neon-border">
-                    <h1 class="text-6xl md:text-8xl font-black mb-6 neon-text">
-                        Historia y Geografía
-                    </h1>
-                    <p class="text-xl md:text-2xl mb-8 text-gray-300">
-                        Explorando el pasado, presente y futuro con tecnología de vanguardia
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                        <div class="glass rounded-2xl p-6 card-3d">
-                            <div class="counter" data-target="3">0</div>
-                            <p class="text-lg mt-2">Especialidades</p>
-                        </div>
-                        <div class="glass rounded-2xl p-6 card-3d">
-                            <div class="counter" data-target="4">0</div>
-                            <p class="text-lg mt-2">Años de Formación</p>
-                        </div>
-                        <div class="glass rounded-2xl p-6 card-3d">
-                            <div class="counter" data-target="100">0</div>
-                            <p class="text-lg mt-2">% Innovación</p>
-                        </div>
+    <!-- Dashboard (Hidden by default) -->
+    <div id="dashboardScreen" class="hidden">
+        <!-- Sidebar -->
+        <div class="dashboard-sidebar" id="sidebar">
+            <div class="mb-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold" id="userNameDisplay">Usuario</p>
+                        <p class="text-xs text-gray-400" id="userRoleDisplay">Rol</p>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- Historia Section -->
-        <section id="historia" class="min-h-screen py-20 px-6 hidden">
-            <div class="container mx-auto">
-                <h2 class="text-5xl font-black mb-12 text-center neon-text">
-                    <i class="fas fa-landmark mr-4"></i>Historia
-                </h2>
-                <div class="glass rounded-3xl p-8 max-w-6xl mx-auto">
-                    <p class="text-xl text-center text-gray-300 mb-8">
-                        Contenido de Historia en desarrollo...
-                    </p>
+            <nav>
+                <div class="sidebar-menu-item active" onclick="showDashboardSection('overview')">
+                    <i class="fas fa-home"></i>
+                    <span>Inicio</span>
                 </div>
-            </div>
-        </section>
-
-        <!-- Geogo Section -->
-        <section id="geogo" class="min-h-screen py-20 px-6 hidden">
-            <div class="container mx-auto">
-                <h2 class="text-5xl font-black mb-12 text-center neon-text">
-                    <i class="fas fa-globe mr-4"></i>Geogo
-                </h2>
-
-                <!-- Geogo 1° Año -->
-                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
-                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geogo1')">
-                        <h3 class="text-3xl font-bold">
-                            <span class="gradient-animate px-4 py-2 rounded-full">1° Año</span>
-                        </h3>
-                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geogo1-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="geogo1">
-                        <div class="grid md:grid-cols-2 gap-6 mt-6">
-                            <!-- Física -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-atom mr-2"></i>Física</h4>
-                                <ul class="content-list">
-                                    <li>Introducción a la física</li>
-                                    <li>Cinemática y movimiento</li>
-                                    <li>Fuerzas y leyes de Newton</li>
-                                    <li>Energía y trabajo</li>
-                                    <li>Ondas y sonido</li>
-                                    <li>Óptica básica</li>
-                                </ul>
-                            </div>
-
-                            <!-- Programación -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-code mr-2"></i>Programación</h4>
-                                <ul class="content-list">
-                                    <li>Introducción a la programación</li>
-                                    <li>Algoritmos y lógica</li>
-                                    <li>Variables y tipos de datos</li>
-                                    <li>Estructuras de control</li>
-                                    <li>Funciones básicas</li>
-                                    <li>Proyectos simples en Python/Scratch</li>
-                                </ul>
-                            </div>
-
-                            <!-- Diseño 3D -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-cube mr-2"></i>Diseño 3D</h4>
-                                <ul class="content-list">
-                                    <li>Introducción al modelado 3D</li>
-                                    <li>Software de diseño (Tinkercad, Blender básico)</li>
-                                    <li>Formas geométricas básicas</li>
-                                    <li>Modificadores y transformaciones</li>
-                                    <li>Texturizado básico</li>
-                                    <li>Exportación para impresión 3D</li>
-                                </ul>
-                            </div>
-
-                            <!-- Electrónica -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-microchip mr-2"></i>Electrónica</h4>
-                                <ul class="content-list">
-                                    <li>Conceptos básicos de electricidad</li>
-                                    <li>Componentes electrónicos</li>
-                                    <li>Circuitos simples</li>
-                                    <li>Ley de Ohm</li>
-                                    <li>Protoboard y conexiones</li>
-                                    <li>Proyectos con LEDs y resistencias</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Media Placeholders -->
-                        <div class="grid md:grid-cols-2 gap-6 mt-8">
-                            <div class="media-placeholder">
-                                <i class="fas fa-video"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Video Explicativo</h4>
-                                <p class="text-gray-400">Espacio para video de introducción a Geogo 1° Año</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
-                            </div>
-                            <div class="media-placeholder">
-                                <i class="fas fa-cube"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D Interactivo</h4>
-                                <p class="text-gray-400">Espacio para modelo 3D de ejemplo</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="sidebar-menu-item" onclick="showDashboardSection('subjects')">
+                    <i class="fas fa-book"></i>
+                    <span>Materias</span>
                 </div>
-
-                <!-- Geogo 2° Año -->
-                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
-                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geogo2')">
-                        <h3 class="text-3xl font-bold">
-                            <span class="gradient-animate px-4 py-2 rounded-full">2° Año</span>
-                        </h3>
-                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geogo2-icon"></i>
-                    </div>
-                    <div class="accordion-content" id="geogo2">
-                        <div class="grid md:grid-cols-2 gap-6 mt-6">
-                            <!-- IoT -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-network-wired mr-2"></i>Internet de las Cosas (IoT)</h4>
-                                <ul class="content-list">
-                                    <li>Introducción al IoT</li>
-                                    <li>Sensores y actuadores</li>
-                                    <li>Arduino y microcontroladores</li>
-                                    <li>Conectividad (WiFi, Bluetooth)</li>
-                                    <li>Plataformas IoT (ThingSpeak, Blynk)</li>
-                                    <li>Proyectos de automatización</li>
-                                </ul>
-                            </div>
-
-                            <!-- Drones -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-drone mr-2"></i>Introducción a Drones</h4>
-                                <ul class="content-list">
-                                    <li>Historia y evolución de los drones</li>
-                                    <li>Tipos de drones y aplicaciones</li>
-                                    <li>Componentes de un drone</li>
-                                    <li>Principios de vuelo</li>
-                                    <li>Seguridad y normativa básica</li>
-                                    <li>Simuladores de vuelo</li>
-                                </ul>
-                            </div>
-
-                            <!-- Programación Avanzada -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-laptop-code mr-2"></i>Programación Avanzada</h4>
-                                <ul class="content-list">
-                                    <li>Programación orientada a objetos</li>
-                                    <li>Estructuras de datos</li>
-                                    <li>Algoritmos de búsqueda y ordenamiento</li>
-                                    <li>Desarrollo web básico (HTML, CSS)</li>
-                                    <li>Bases de datos simples</li>
-                                    <li>Proyectos integradores</li>
-                                </ul>
-                            </div>
-
-                            <!-- Diseño 3D Avanzado -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-cubes mr-2"></i>Diseño 3D Avanzado</h4>
-                                <ul class="content-list">
-                                    <li>Modelado orgánico</li>
-                                    <li>Animación 3D básica</li>
-                                    <li>Renderizado y materiales</li>
-                                    <li>Diseño paramétrico</li>
-                                    <li>Impresión 3D avanzada</li>
-                                    <li>Proyectos de diseño industrial</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Media Placeholders -->
-                        <div class="grid md:grid-cols-2 gap-6 mt-8">
-                            <div class="media-placeholder">
-                                <i class="fas fa-video"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Video Demostrativo</h4>
-                                <p class="text-gray-400">Espacio para video de proyectos IoT y Drones</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
-                            </div>
-                            <div class="media-placeholder">
-                                <i class="fas fa-cube"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D de Drone</h4>
-                                <p class="text-gray-400">Espacio para modelo 3D interactivo de drone</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="sidebar-menu-item" onclick="showDashboardSection('enrolled')">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Mis Inscripciones</span>
                 </div>
-            </div>
-        </section>
+                <div class="sidebar-menu-item" onclick="showDashboardSection('content')">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Contenido</span>
+                </div>
+                <div class="sidebar-menu-item" id="teacherOnlyMenu" style="display: none;" onclick="showDashboardSection('students')">
+                    <i class="fas fa-users"></i>
+                    <span>Estudiantes</span>
+                </div>
+                <div class="sidebar-menu-item" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </div>
+            </nav>
+        </div>
 
-        <!-- Geomática Section -->
-        <section id="geomatica" class="min-h-screen py-20 px-6 hidden">
-            <div class="container mx-auto">
-                <h2 class="text-5xl font-black mb-12 text-center neon-text">
-                    <i class="fas fa-drone mr-4"></i>Geomática
+        <!-- Main Content -->
+        <div class="dashboard-content relative z-10">
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden fixed top-4 left-4 z-50 glass p-3 rounded-lg" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Overview Section -->
+            <div id="overviewSection" class="dashboard-section">
+                <h2 class="text-4xl font-bold mb-8 neon-text">
+                    <i class="fas fa-home mr-3"></i>Panel de Control
                 </h2>
 
-                <!-- Geomática 3° Año -->
-                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
-                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geo3')">
-                        <h3 class="text-3xl font-bold">
-                            <span class="gradient-animate px-4 py-2 rounded-full">3° Año</span>
-                        </h3>
-                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geo3-icon"></i>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="stats-card card-3d">
+                        <i class="fas fa-book text-3xl text-blue-400 mb-3"></i>
+                        <div class="stats-number" id="totalSubjects">0</div>
+                        <p class="text-gray-300">Materias Disponibles</p>
                     </div>
-                    <div class="accordion-content" id="geo3">
-                        <div class="mb-6">
-                            <h4 class="text-2xl font-bold mb-4 text-center">
-                                <i class="fas fa-certificate mr-2"></i>Full Stack Drone Operator - Nivel Inicial
-                            </h4>
-                            <p class="text-gray-300 text-center mb-6">Formación integral en operación de drones y procesamiento de datos geoespaciales</p>
+                    <div class="stats-card card-3d">
+                        <i class="fas fa-check-circle text-3xl text-green-400 mb-3"></i>
+                        <div class="stats-number" id="enrolledCount">0</div>
+                        <p class="text-gray-300">Inscripciones</p>
+                    </div>
+                    <div class="stats-card card-3d">
+                        <i class="fas fa-trophy text-3xl text-yellow-400 mb-3"></i>
+                        <div class="stats-number">100</div>
+                        <p class="text-gray-300">% Progreso</p>
+                    </div>
+                </div>
+
+                <div class="glass rounded-3xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">
+                        <i class="fas fa-star mr-2"></i>Acceso Rápido
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="subject-card" onclick="showDashboardSection('subjects')">
+                            <i class="fas fa-globe text-3xl text-blue-400 mb-3"></i>
+                            <h4 class="font-bold text-lg mb-2">Explorar Materias</h4>
+                            <p class="text-sm text-gray-400">Descubre todas las materias disponibles</p>
+                        </div>
+                        <div class="subject-card" onclick="showDashboardSection('enrolled')">
+                            <i class="fas fa-bookmark text-3xl text-green-400 mb-3"></i>
+                            <h4 class="font-bold text-lg mb-2">Mis Inscripciones</h4>
+                            <p class="text-sm text-gray-400">Ver materias en las que estás inscrito</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subjects Section -->
+            <div id="subjectsSection" class="dashboard-section hidden">
+                <h2 class="text-4xl font-bold mb-8 neon-text">
+                    <i class="fas fa-book mr-3"></i>Materias Disponibles
+                </h2>
+
+                <!-- Geogo -->
+                <div class="glass rounded-3xl p-8 mb-8">
+                    <h3 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-globe mr-3"></i>Geogo
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="subject-card" data-subject="geogo-1">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Geogo 1° Año</h4>
+                                    <span class="badge badge-info">1° Año</span>
+                                </div>
+                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geogo-1')">
+                                    <i class="fas fa-plus mr-2"></i>Inscribirse
+                                </button>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-3">Física, Programación, Diseño 3D, Electrónica</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="badge badge-warning"><i class="fas fa-atom mr-1"></i>Física</span>
+                                <span class="badge badge-warning"><i class="fas fa-code mr-1"></i>Programación</span>
+                                <span class="badge badge-warning"><i class="fas fa-cube mr-1"></i>Diseño 3D</span>
+                            </div>
                         </div>
 
-                        <div class="grid md:grid-cols-2 gap-6 mt-6">
-                            <!-- Certificaciones DGAC -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-id-card mr-2"></i>Certificaciones DGAC</h4>
-                                <ul class="content-list">
-                                    <li>Preparación examen teórico DGAC</li>
-                                    <li>Normativa aeronáutica chilena</li>
-                                    <li>Espacios aéreos y restricciones</li>
-                                    <li>Meteorología aplicada</li>
-                                    <li>Procedimientos de emergencia</li>
-                                    <li>Documentación y permisos</li>
-                                </ul>
+                        <div class="subject-card" data-subject="geogo-2">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Geogo 2° Año</h4>
+                                    <span class="badge badge-info">2° Año</span>
+                                </div>
+                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geogo-2')">
+                                    <i class="fas fa-plus mr-2"></i>Inscribirse
+                                </button>
                             </div>
-
-                            <!-- Certificación SAG -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-leaf mr-2"></i>Certificación SAG</h4>
-                                <ul class="content-list">
-                                    <li>Aplicación de agroquímicos con drones</li>
-                                    <li>Normativa SAG para fumigación aérea</li>
-                                    <li>Seguridad en aplicaciones agrícolas</li>
-                                    <li>Calibración de equipos</li>
-                                    <li>Registro y trazabilidad</li>
-                                    <li>Buenas prácticas agrícolas</li>
-                                </ul>
-                            </div>
-
-                            <!-- Operación de Drones -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-helicopter mr-2"></i>Operación de Drones</h4>
-                                <ul class="content-list">
-                                    <li>Vuelo manual avanzado</li>
-                                    <li>Planificación de misiones</li>
-                                    <li>Software de control (DJI, Pix4D)</li>
-                                    <li>Vuelo autónomo y waypoints</li>
-                                    <li>Captura de imágenes aéreas</li>
-                                    <li>Mantenimiento preventivo</li>
-                                </ul>
-                            </div>
-
-                            <!-- Procesamiento de Datos -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-database mr-2"></i>Procesamiento de Datos Inicial</h4>
-                                <ul class="content-list">
-                                    <li>Introducción a fotogrametría</li>
-                                    <li>Software de procesamiento (Pix4D, Agisoft)</li>
-                                    <li>Generación de ortomosaicos</li>
-                                    <li>Modelos digitales de elevación (DEM)</li>
-                                    <li>Nube de puntos básica</li>
-                                    <li>Control de calidad de datos</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Media Placeholders -->
-                        <div class="grid md:grid-cols-2 gap-6 mt-8">
-                            <div class="media-placeholder">
-                                <i class="fas fa-video"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Video de Vuelo</h4>
-                                <p class="text-gray-400">Espacio para video de operación de drones</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
-                            </div>
-                            <div class="media-placeholder">
-                                <i class="fas fa-map"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Ortomosaico Ejemplo</h4>
-                                <p class="text-gray-400">Espacio para visualización de ortomosaico</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: Imagen interactiva o visor GIS</p>
+                            <p class="text-sm text-gray-400 mb-3">IoT, Drones, Programación Avanzada</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="badge badge-warning"><i class="fas fa-network-wired mr-1"></i>IoT</span>
+                                <span class="badge badge-warning"><i class="fas fa-drone mr-1"></i>Drones</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Geomática 4° Año -->
-                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
-                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geo4')">
-                        <h3 class="text-3xl font-bold">
-                            <span class="gradient-animate px-4 py-2 rounded-full">4° Año</span>
-                        </h3>
-                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geo4-icon"></i>
+                <!-- Geomática -->
+                <div class="glass rounded-3xl p-8 mb-8">
+                    <h3 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-drone mr-3"></i>Geomática
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="subject-card" data-subject="geomatica-3">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Geomática 3° Año</h4>
+                                    <span class="badge badge-info">3° Año</span>
+                                </div>
+                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geomatica-3')">
+                                    <i class="fas fa-plus mr-2"></i>Inscribirse
+                                </button>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-3">Certificaciones DGAC/SAG, Operación de Drones</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="badge badge-warning"><i class="fas fa-certificate mr-1"></i>DGAC</span>
+                                <span class="badge badge-warning"><i class="fas fa-leaf mr-1"></i>SAG</span>
+                            </div>
+                        </div>
+
+                        <div class="subject-card" data-subject="geomatica-4">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Geomática 4° Año</h4>
+                                    <span class="badge badge-info">4° Año</span>
+                                </div>
+                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geomatica-4')">
+                                    <i class="fas fa-plus mr-2"></i>Inscribirse
+                                </button>
+                            </div>
+                            <p class="text-sm text-gray-400 mb-3">Full Stack Drone Operator Avanzado</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="badge badge-warning"><i class="fas fa-rocket mr-1"></i>Avanzado</span>
+                                <span class="badge badge-warning"><i class="fas fa-brain mr-1"></i>Procesamiento</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="accordion-content" id="geo4">
-                        <div class="mb-6">
-                            <h4 class="text-2xl font-bold mb-4 text-center">
-                                <i class="fas fa-star mr-2"></i>Full Stack Drone Operator - Nivel Avanzado
-                            </h4>
-                            <p class="text-gray-300 text-center mb-6">Especialización profesional y gestión de proyectos geoespaciales</p>
-                        </div>
+                </div>
 
-                        <div class="grid md:grid-cols-2 gap-6 mt-6">
-                            <!-- Operaciones Avanzadas -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-rocket mr-2"></i>Operaciones Avanzadas</h4>
-                                <ul class="content-list">
-                                    <li>Vuelos en condiciones adversas</li>
-                                    <li>Operaciones nocturnas</li>
-                                    <li>Vuelos BVLOS (Beyond Visual Line of Sight)</li>
-                                    <li>Drones de ala fija</li>
-                                    <li>Sistemas multi-drone</li>
-                                    <li>Inspecciones técnicas especializadas</li>
-                                </ul>
+                <!-- Historia -->
+                <div class="glass rounded-3xl p-8">
+                    <h3 class="text-3xl font-bold mb-6">
+                        <i class="fas fa-landmark mr-3"></i>Historia
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="subject-card" data-subject="historia-general">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Historia General</h4>
+                                    <span class="badge badge-info">Todos los años</span>
+                                </div>
+                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('historia-general')">
+                                    <i class="fas fa-plus mr-2"></i>Inscribirse
+                                </button>
                             </div>
-
-                            <!-- Procesamiento Avanzado -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-brain mr-2"></i>Procesamiento Avanzado</h4>
-                                <ul class="content-list">
-                                    <li>Fotogrametría avanzada</li>
-                                    <li>LiDAR y procesamiento de nubes de puntos</li>
-                                    <li>Análisis multispectral e hiperespectral</li>
-                                    <li>Termografía y análisis térmico</li>
-                                    <li>Machine Learning para clasificación</li>
-                                    <li>Integración con GIS profesional</li>
-                                </ul>
-                            </div>
-
-                            <!-- Aplicaciones Profesionales -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-industry mr-2"></i>Aplicaciones Profesionales</h4>
-                                <ul class="content-list">
-                                    <li>Agricultura de precisión</li>
-                                    <li>Topografía y catastro</li>
-                                    <li>Inspección de infraestructura</li>
-                                    <li>Minería y canteras</li>
-                                    <li>Medio ambiente y conservación</li>
-                                    <li>Emergencias y rescate</li>
-                                </ul>
-                            </div>
-
-                            <!-- Gestión y Finanzas -->
-                            <div class="content-block">
-                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-chart-line mr-2"></i>Gestión y Finanzas</h4>
-                                <ul class="content-list">
-                                    <li>Gestión de proyectos geoespaciales</li>
-                                    <li>Cotización y presupuestos</li>
-                                    <li>Costos operacionales</li>
-                                    <li>Marketing de servicios</li>
-                                    <li>Aspectos legales y seguros</li>
-                                    <li>Emprendimiento en geomática</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Proyecto Final -->
-                        <div class="mt-8 p-6 glass rounded-2xl border-2 border-purple-500">
-                            <h4 class="text-2xl font-bold mb-4 text-center">
-                                <i class="fas fa-trophy mr-2"></i>Proyecto Final Integrador
-                            </h4>
-                            <p class="text-gray-300 text-center mb-4">
-                                Los estudiantes desarrollan un proyecto completo que incluye:
-                            </p>
-                            <ul class="content-list max-w-2xl mx-auto">
-                                <li>Planificación y gestión del proyecto</li>
-                                <li>Obtención de permisos y autorizaciones</li>
-                                <li>Ejecución de vuelos y captura de datos</li>
-                                <li>Procesamiento y análisis completo</li>
-                                <li>Generación de productos finales</li>
-                                <li>Presentación profesional a cliente real</li>
-                            </ul>
-                        </div>
-
-                        <!-- Media Placeholders -->
-                        <div class="grid md:grid-cols-2 gap-6 mt-8">
-                            <div class="media-placeholder">
-                                <i class="fas fa-video"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Portafolio de Proyectos</h4>
-                                <p class="text-gray-400">Espacio para video showcase de proyectos realizados</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
-                            </div>
-                            <div class="media-placeholder">
-                                <i class="fas fa-cube"></i>
-                                <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D Avanzado</h4>
-                                <p class="text-gray-400">Espacio para modelo 3D de proyecto final</p>
-                                <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
+                            <p class="text-sm text-gray-400 mb-3">Historia Universal y de Chile</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <span class="badge badge-warning"><i class="fas fa-globe-americas mr-1"></i>Universal</span>
+                                <span class="badge badge-warning"><i class="fas fa-flag mr-1"></i>Chile</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+
+            <!-- Enrolled Section -->
+            <div id="enrolledSection" class="dashboard-section hidden">
+                <h2 class="text-4xl font-bold mb-8 neon-text">
+                    <i class="fas fa-check-circle mr-3"></i>Mis Inscripciones
+                </h2>
+                <div id="enrolledList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass rounded-3xl p-8 text-center">
+                        <i class="fas fa-inbox text-6xl text-gray-600 mb-4"></i>
+                        <p class="text-gray-400">No tienes inscripciones aún</p>
+                        <button class="btn-primary mt-4 inline-block" onclick="showDashboardSection('subjects')">
+                            Explorar Materias
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div id="contentSection" class="dashboard-section hidden">
+                <h2 class="text-4xl font-bold mb-8 neon-text">
+                    <i class="fas fa-folder-open mr-3"></i>Contenido de Materias
+                </h2>
+
+                <div id="contentDisplay">
+                    <!-- Content will be loaded here dynamically -->
+                </div>
+            </div>
+
+            <!-- Students Section (Teacher Only) -->
+            <div id="studentsSection" class="dashboard-section hidden">
+                <h2 class="text-4xl font-bold mb-8 neon-text">
+                    <i class="fas fa-users mr-3"></i>Gestión de Estudiantes
+                </h2>
+
+                <div class="glass rounded-3xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">Lista de Estudiantes</h3>
+                    <div class="space-y-4">
+                        <div class="subject-card flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold">Juan Pérez</p>
+                                    <p class="text-sm text-gray-400">Geogo 1° Año, Geomática 3° Año</p>
+                                </div>
+                            </div>
+                            <span class="badge badge-success">Activo</span>
+                        </div>
+                        <div class="subject-card flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold">María González</p>
+                                    <p class="text-sm text-gray-400">Geogo 2° Año, Historia General</p>
+                                </div>
+                            </div>
+                            <span class="badge badge-success">Activo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Scroll to Top Button -->
@@ -780,6 +828,134 @@
     </div>
 
     <script>
+        // Global State
+        let currentUser = null;
+        let enrolledSubjects = [];
+
+        // Subject Content Data
+        const subjectContent = {
+            'geogo-1': {
+                title: 'Geogo 1° Año',
+                icon: 'fa-globe',
+                modules: [
+                    {
+                        name: 'Física',
+                        icon: 'fa-atom',
+                        topics: ['Introducción a la física', 'Cinemática y movimiento', 'Fuerzas y leyes de Newton', 'Energía y trabajo', 'Ondas y sonido', 'Óptica básica']
+                    },
+                    {
+                        name: 'Programación',
+                        icon: 'fa-code',
+                        topics: ['Introducción a la programación', 'Algoritmos y lógica', 'Variables y tipos de datos', 'Estructuras de control', 'Funciones básicas', 'Proyectos simples en Python/Scratch']
+                    },
+                    {
+                        name: 'Diseño 3D',
+                        icon: 'fa-cube',
+                        topics: ['Introducción al modelado 3D', 'Software de diseño (Tinkercad, Blender básico)', 'Formas geométricas básicas', 'Modificadores y transformaciones', 'Texturizado básico', 'Exportación para impresión 3D']
+                    },
+                    {
+                        name: 'Electrónica',
+                        icon: 'fa-microchip',
+                        topics: ['Conceptos básicos de electricidad', 'Componentes electrónicos', 'Circuitos simples', 'Ley de Ohm', 'Protoboard y conexiones', 'Proyectos con LEDs y resistencias']
+                    }
+                ]
+            },
+            'geogo-2': {
+                title: 'Geogo 2° Año',
+                icon: 'fa-globe',
+                modules: [
+                    {
+                        name: 'Internet de las Cosas (IoT)',
+                        icon: 'fa-network-wired',
+                        topics: ['Introducción al IoT', 'Sensores y actuadores', 'Arduino y microcontroladores', 'Conectividad (WiFi, Bluetooth)', 'Plataformas IoT (ThingSpeak, Blynk)', 'Proyectos de automatización']
+                    },
+                    {
+                        name: 'Introducción a Drones',
+                        icon: 'fa-drone',
+                        topics: ['Historia y evolución de los drones', 'Tipos de drones y aplicaciones', 'Componentes de un drone', 'Principios de vuelo', 'Seguridad y normativa básica', 'Simuladores de vuelo']
+                    },
+                    {
+                        name: 'Programación Avanzada',
+                        icon: 'fa-laptop-code',
+                        topics: ['Programación orientada a objetos', 'Estructuras de datos', 'Algoritmos de búsqueda y ordenamiento', 'Desarrollo web básico (HTML, CSS)', 'Bases de datos simples', 'Proyectos integradores']
+                    },
+                    {
+                        name: 'Diseño 3D Avanzado',
+                        icon: 'fa-cubes',
+                        topics: ['Modelado orgánico', 'Animación 3D básica', 'Renderizado y materiales', 'Diseño paramétrico', 'Impresión 3D avanzada', 'Proyectos de diseño industrial']
+                    }
+                ]
+            },
+            'geomatica-3': {
+                title: 'Geomática 3° Año',
+                icon: 'fa-drone',
+                modules: [
+                    {
+                        name: 'Certificaciones DGAC',
+                        icon: 'fa-id-card',
+                        topics: ['Preparación examen teórico DGAC', 'Normativa aeronáutica chilena', 'Espacios aéreos y restricciones', 'Meteorología aplicada', 'Procedimientos de emergencia', 'Documentación y permisos']
+                    },
+                    {
+                        name: 'Certificación SAG',
+                        icon: 'fa-leaf',
+                        topics: ['Aplicación de agroquímicos con drones', 'Normativa SAG para fumigación aérea', 'Seguridad en aplicaciones agrícolas', 'Calibración de equipos', 'Registro y trazabilidad', 'Buenas prácticas agrícolas']
+                    },
+                    {
+                        name: 'Operación de Drones',
+                        icon: 'fa-helicopter',
+                        topics: ['Vuelo manual avanzado', 'Planificación de misiones', 'Software de control (DJI, Pix4D)', 'Vuelo autónomo y waypoints', 'Captura de imágenes aéreas', 'Mantenimiento preventivo']
+                    },
+                    {
+                        name: 'Procesamiento de Datos Inicial',
+                        icon: 'fa-database',
+                        topics: ['Introducción a fotogrametría', 'Software de procesamiento (Pix4D, Agisoft)', 'Generación de ortomosaicos', 'Modelos digitales de elevación (DEM)', 'Nube de puntos básica', 'Control de calidad de datos']
+                    }
+                ]
+            },
+            'geomatica-4': {
+                title: 'Geomática 4° Año',
+                icon: 'fa-drone',
+                modules: [
+                    {
+                        name: 'Operaciones Avanzadas',
+                        icon: 'fa-rocket',
+                        topics: ['Vuelos en condiciones adversas', 'Operaciones nocturnas', 'Vuelos BVLOS (Beyond Visual Line of Sight)', 'Drones de ala fija', 'Sistemas multi-drone', 'Inspecciones técnicas especializadas']
+                    },
+                    {
+                        name: 'Procesamiento Avanzado',
+                        icon: 'fa-brain',
+                        topics: ['Fotogrametría avanzada', 'LiDAR y procesamiento de nubes de puntos', 'Análisis multispectral e hiperespectral', 'Termografía y análisis térmico', 'Machine Learning para clasificación', 'Integración con GIS profesional']
+                    },
+                    {
+                        name: 'Aplicaciones Profesionales',
+                        icon: 'fa-industry',
+                        topics: ['Agricultura de precisión', 'Topografía y catastro', 'Inspección de infraestructura', 'Minería y canteras', 'Medio ambiente y conservación', 'Emergencias y rescate']
+                    },
+                    {
+                        name: 'Gestión y Finanzas',
+                        icon: 'fa-chart-line',
+                        topics: ['Gestión de proyectos geoespaciales', 'Cotización y presupuestos', 'Costos operacionales', 'Marketing de servicios', 'Aspectos legales y seguros', 'Emprendimiento en geomática']
+                    }
+                ]
+            },
+            'historia-general': {
+                title: 'Historia General',
+                icon: 'fa-landmark',
+                modules: [
+                    {
+                        name: 'Historia Universal',
+                        icon: 'fa-globe-americas',
+                        topics: ['Civilizaciones antiguas', 'Edad Media', 'Renacimiento', 'Revoluciones modernas', 'Guerras mundiales', 'Historia contemporánea']
+                    },
+                    {
+                        name: 'Historia de Chile',
+                        icon: 'fa-flag',
+                        topics: ['Pueblos originarios', 'Conquista y colonia', 'Independencia', 'República', 'Siglo XX', 'Chile contemporáneo']
+                    }
+                ]
+            }
+        };
+
         // Create Particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
@@ -795,64 +971,212 @@
             }
         }
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = parseInt(counter.getAttribute('data-target'));
-                const duration = 2000;
-                const increment = target / (duration / 16);
-                let current = 0;
+        // Role Selection
+        let selectedRole = null;
+        function selectRole(role) {
+            selectedRole = role;
+            document.getElementById('studentRole').classList.remove('selected');
+            document.getElementById('teacherRole').classList.remove('selected');
 
-                const updateCounter = () => {
-                    current += increment;
-                    if (current < target) {
-                        counter.textContent = Math.floor(current);
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target;
-                    }
-                };
-
-                updateCounter();
-            });
-        }
-
-        // Show Section
-        function showSection(sectionId) {
-            const sections = ['home', 'historia', 'geogo', 'geomatica'];
-            sections.forEach(id => {
-                const section = document.getElementById(id);
-                if (id === sectionId) {
-                    section.classList.remove('hidden');
-                    setTimeout(() => {
-                        section.querySelectorAll('.reveal').forEach((el, index) => {
-                            setTimeout(() => el.classList.add('active'), index * 100);
-                        });
-                    }, 100);
-                } else {
-                    section.classList.add('hidden');
-                }
-            });
-
-            if (sectionId === 'home') {
-                animateCounters();
+            if (role === 'student') {
+                document.getElementById('studentRole').classList.add('selected');
+            } else {
+                document.getElementById('teacherRole').classList.add('selected');
             }
         }
 
-        // Toggle Accordion
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            const icon = document.getElementById(id + '-icon');
+        // Login
+        function login(event) {
+            event.preventDefault();
 
-            content.classList.toggle('active');
-            icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+            if (!selectedRole) {
+                alert('Por favor selecciona un rol (Alumno o Profesor)');
+                return;
+            }
+
+            const username = document.getElementById('username').value;
+
+            currentUser = {
+                name: username,
+                role: selectedRole
+            };
+
+            // Save to localStorage
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            localStorage.setItem('enrolledSubjects', JSON.stringify(enrolledSubjects));
+
+            // Show dashboard
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('dashboardScreen').classList.remove('hidden');
+
+            // Update user info
+            document.getElementById('userNameDisplay').textContent = currentUser.name;
+            document.getElementById('userRoleDisplay').textContent = currentUser.role === 'student' ? 'Alumno' : 'Profesor';
+
+            // Show teacher menu if teacher
+            if (currentUser.role === 'teacher') {
+                document.getElementById('teacherOnlyMenu').style.display = 'flex';
+            }
+
+            updateStats();
         }
 
-        // Toggle Mobile Menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+        // Logout
+        function logout() {
+            currentUser = null;
+            enrolledSubjects = [];
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('enrolledSubjects');
+
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('dashboardScreen').classList.add('hidden');
+
+            // Reset form
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            selectedRole = null;
+            document.getElementById('studentRole').classList.remove('selected');
+            document.getElementById('teacherRole').classList.remove('selected');
+        }
+
+        // Toggle Enrollment
+        function toggleEnrollment(subjectId) {
+            const index = enrolledSubjects.indexOf(subjectId);
+            const card = document.querySelector(`[data-subject="${subjectId}"]`);
+            const btn = card.querySelector('.enroll-btn');
+
+            if (index === -1) {
+                enrolledSubjects.push(subjectId);
+                card.classList.add('enrolled');
+                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Inscrito';
+                btn.style.background = 'linear-gradient(135deg, #4ecdc4, #45b7d1)';
+            } else {
+                enrolledSubjects.splice(index, 1);
+                card.classList.remove('enrolled');
+                btn.innerHTML = '<i class="fas fa-plus mr-2"></i>Inscribirse';
+                btn.style.background = 'linear-gradient(135deg, #00f3ff, #ff00ff)';
+            }
+
+            localStorage.setItem('enrolledSubjects', JSON.stringify(enrolledSubjects));
+            updateStats();
+            updateEnrolledList();
+        }
+
+        // Update Stats
+        function updateStats() {
+            document.getElementById('totalSubjects').textContent = Object.keys(subjectContent).length;
+            document.getElementById('enrolledCount').textContent = enrolledSubjects.length;
+        }
+
+        // Update Enrolled List
+        function updateEnrolledList() {
+            const container = document.getElementById('enrolledList');
+
+            if (enrolledSubjects.length === 0) {
+                container.innerHTML = `
+                    <div class="glass rounded-3xl p-8 text-center">
+                        <i class="fas fa-inbox text-6xl text-gray-600 mb-4"></i>
+                        <p class="text-gray-400">No tienes inscripciones aún</p>
+                        <button class="btn-primary mt-4 inline-block" onclick="showDashboardSection('subjects')">
+                            Explorar Materias
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = enrolledSubjects.map(subjectId => {
+                const subject = subjectContent[subjectId];
+                return `
+                    <div class="subject-card enrolled">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h4 class="text-xl font-bold mb-2">
+                                    <i class="fas ${subject.icon} mr-2"></i>${subject.title}
+                                </h4>
+                                <span class="badge badge-success">
+                                    <i class="fas fa-check mr-1"></i>Inscrito
+                                </span>
+                            </div>
+                            <button class="btn-primary px-4 py-2 text-sm" onclick="viewSubjectContent('${subjectId}')">
+                                <i class="fas fa-eye mr-2"></i>Ver Contenido
+                            </button>
+                        </div>
+                        <p class="text-sm text-gray-400">${subject.modules.length} módulos disponibles</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // View Subject Content
+        function viewSubjectContent(subjectId) {
+            showDashboardSection('content');
+            const subject = subjectContent[subjectId];
+            const container = document.getElementById('contentDisplay');
+
+            container.innerHTML = `
+                <div class="glass rounded-3xl p-8 mb-8">
+                    <h3 class="text-3xl font-bold mb-6">
+                        <i class="fas ${subject.icon} mr-3"></i>${subject.title}
+                    </h3>
+
+                    ${subject.modules.map((module, idx) => `
+                        <div class="content-block mb-6">
+                            <h4 class="text-2xl font-bold mb-4">
+                                <i class="fas ${module.icon} mr-2"></i>${module.name}
+                            </h4>
+                            <ul class="content-list">
+                                ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
+                            </ul>
+                        </div>
+                    `).join('')}
+
+                    <div class="grid md:grid-cols-2 gap-6 mt-8">
+                        <div class="media-placeholder">
+                            <i class="fas fa-video"></i>
+                            <h4 class="text-xl font-bold mt-3 mb-2">Video Explicativo</h4>
+                            <p class="text-gray-400">Espacio para video de ${subject.title}</p>
+                            <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
+                        </div>
+                        <div class="media-placeholder">
+                            <i class="fas fa-cube"></i>
+                            <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D Interactivo</h4>
+                            <p class="text-gray-400">Espacio para modelo 3D de ejemplo</p>
+                            <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Show Dashboard Section
+        function showDashboardSection(section) {
+            const sections = ['overview', 'subjects', 'enrolled', 'content', 'students'];
+            sections.forEach(s => {
+                const el = document.getElementById(s + 'Section');
+                if (el) {
+                    el.classList.add('hidden');
+                }
+            });
+
+            document.getElementById(section + 'Section').classList.remove('hidden');
+
+            // Update active menu item
+            document.querySelectorAll('.sidebar-menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.sidebar-menu-item').classList.add('active');
+
+            // Update enrolled list if viewing enrolled section
+            if (section === 'enrolled') {
+                updateEnrolledList();
+            }
+        }
+
+        // Toggle Sidebar (Mobile)
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('mobile-visible');
         }
 
         // Scroll to Top
@@ -868,37 +1192,43 @@
             } else {
                 scrollTop.classList.remove('visible');
             }
-
-            // Navbar background on scroll
-            const navbar = document.getElementById('navbar');
-            if (window.pageYOffset > 50) {
-                navbar.style.background = 'rgba(15, 12, 41, 0.95)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.05)';
-            }
         });
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
-            animateCounters();
 
-            // Reveal elements on scroll
-            const revealElements = () => {
-                const reveals = document.querySelectorAll('.reveal');
-                reveals.forEach(element => {
-                    const windowHeight = window.innerHeight;
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
+            // Check if user is already logged in
+            const savedUser = localStorage.getItem('currentUser');
+            const savedEnrollments = localStorage.getItem('enrolledSubjects');
 
-                    if (elementTop < windowHeight - elementVisible) {
-                        element.classList.add('active');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                enrolledSubjects = savedEnrollments ? JSON.parse(savedEnrollments) : [];
+
+                // Auto login
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('dashboardScreen').classList.remove('hidden');
+                document.getElementById('userNameDisplay').textContent = currentUser.name;
+                document.getElementById('userRoleDisplay').textContent = currentUser.role === 'student' ? 'Alumno' : 'Profesor';
+
+                if (currentUser.role === 'teacher') {
+                    document.getElementById('teacherOnlyMenu').style.display = 'flex';
+                }
+
+                updateStats();
+
+                // Update enrollment buttons
+                enrolledSubjects.forEach(subjectId => {
+                    const card = document.querySelector(`[data-subject="${subjectId}"]`);
+                    if (card) {
+                        const btn = card.querySelector('.enroll-btn');
+                        card.classList.add('enrolled');
+                        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Inscrito';
+                        btn.style.background = 'linear-gradient(135deg, #4ecdc4, #45b7d1)';
                     }
                 });
-            };
-
-            window.addEventListener('scroll', revealElements);
-            revealElements();
+            }
         });
     </script>
 </body>
