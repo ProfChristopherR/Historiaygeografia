@@ -3,1233 +3,877 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Departamento de Historia y Geografía - Liceo Bicentenario San Nicolás</title>
+    <title>Liceo Bicentenario San Nicolás - Historia y Geografía</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* Animated Background Particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
 
         /* Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .glass-dark { background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+
+        /* Gradients */
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Animations */
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); } 50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        .animate-slide-in { animation: slideIn 0.5s ease-out forwards; }
+
+        /* Hover Effects */
+        .hover-lift { transition: all 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+
+        /* Sidebar */
+        .sidebar { transition: transform 0.3s ease; }
+        .sidebar-closed { transform: translateX(-100%); }
+
+        @media (min-width: 768px) {
+            .sidebar { transform: translateX(0) !important; }
         }
 
-        /* Neon Glow */
-        .neon-text {
-            text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff, 0 0 30px #00f3ff;
-        }
+        /* Content Cards */
+        .content-card { transition: all 0.3s ease; border-left: 4px solid transparent; }
+        .content-card:hover { border-left-color: #667eea; background: rgba(102, 126, 234, 0.05); }
 
-        .neon-border {
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5), 0 0 30px rgba(0, 243, 255, 0.3);
-        }
+        /* Progress Bar */
+        .progress-bar { height: 4px; background: #e5e7eb; border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s ease; }
 
-        /* 3D Card Hover */
-        .card-3d {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-        }
+        /* Badge */
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .badge-blue { background: rgba(102, 126, 234, 0.2); color: #667eea; }
+        .badge-purple { background: rgba(118, 75, 162, 0.2); color: #764ba2; }
+        .badge-green { background: rgba(16, 185, 129, 0.2); color: #10b981; }
 
-        .card-3d:hover {
-            transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 25px 50px rgba(0, 243, 255, 0.3);
-        }
-
-        /* Animated Gradient */
-        .gradient-animate {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b731);
-            background-size: 300% 300%;
-            animation: gradientShift 8s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating Shapes */
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.3;
-            animation: floatShape 15s infinite ease-in-out;
-        }
-
-        @keyframes floatShape {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-30px, 30px) scale(0.9); }
-        }
-
-        /* Progress Bar Animation */
-        .progress-bar {
-            height: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #00f3ff, #ff00ff);
-            border-radius: 10px;
-            transition: width 1s ease;
-        }
-
-        /* Animated Timeline */
-        .timeline-item {
-            position: relative;
-            padding-left: 40px;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateX(-50px);
-            animation: slideIn 0.6s forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #00f3ff, #ff00ff);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            left: 9px;
-            top: 20px;
-            width: 2px;
-            height: calc(100% + 10px);
-            background: linear-gradient(180deg, rgba(0, 243, 255, 0.5), transparent);
-        }
-
-        /* Accordion */
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-        }
-
-        .accordion-content.active {
-            max-height: 2000px;
-        }
-
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Navigation Morphing */
-        .nav-btn {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .nav-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
-        /* Counter Animation */
-        .counter {
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #00f3ff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Scroll to Top Button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #00f3ff, #ff00ff);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            z-index: 1000;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Media Placeholder Styles */
-        .media-placeholder {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(0, 243, 255, 0.3);
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .media-placeholder:hover {
-            border-color: rgba(0, 243, 255, 0.6);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .media-placeholder i {
-            font-size: 3rem;
-            color: #00f3ff;
-            margin-bottom: 15px;
-        }
-
-        /* Content Section Styles */
-        .content-block {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #00f3ff;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-        }
-
-        .content-block h4 {
-            color: #00f3ff;
-            margin-bottom: 10px;
-        }
-
-        .content-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .content-list li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-
-        .content-list li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: #00f3ff;
-            font-weight: bold;
-        }
-
-        /* Login Styles */
-        .login-container {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-card {
-            max-width: 450px;
-            width: 100%;
-        }
-
-        .input-field {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #00f3ff;
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #00f3ff, #ff00ff);
-            padding: 12px 30px;
-            border-radius: 10px;
-            border: none;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.4);
-        }
-
-        .role-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .role-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .role-card:hover {
-            border-color: #00f3ff;
-            transform: translateY(-5px);
-        }
-
-        .role-card.selected {
-            border-color: #00f3ff;
-            background: rgba(0, 243, 255, 0.1);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-        }
-
-        .role-card i {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        /* Dashboard Styles */
-        .dashboard-sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 280px;
-            height: 100vh;
-            background: rgba(15, 12, 41, 0.95);
-            backdrop-filter: blur(10px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            overflow-y: auto;
-            z-index: 100;
-            transition: transform 0.3s ease;
-        }
-
-        .dashboard-sidebar.mobile-hidden {
-            transform: translateX(-100%);
-        }
-
-        .dashboard-content {
-            margin-left: 280px;
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .sidebar-menu-item {
-            padding: 12px 20px;
-            margin: 8px 0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .sidebar-menu-item:hover {
-            background: rgba(0, 243, 255, 0.1);
-            transform: translateX(5px);
-        }
-
-        .sidebar-menu-item.active {
-            background: linear-gradient(135deg, rgba(0, 243, 255, 0.2), rgba(255, 0, 255, 0.2));
-            border-left: 3px solid #00f3ff;
-        }
-
-        .subject-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.3);
-            border-color: #00f3ff;
-        }
-
-        .subject-card.enrolled {
-            border-color: #4ecdc4;
-            background: rgba(78, 205, 196, 0.1);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .badge-success {
-            background: rgba(78, 205, 196, 0.2);
-            color: #4ecdc4;
-        }
-
-        .badge-warning {
-            background: rgba(247, 183, 49, 0.2);
-            color: #f7b731;
-        }
-
-        .badge-info {
-            background: rgba(0, 243, 255, 0.2);
-            color: #00f3ff;
-        }
-
-        @media (max-width: 768px) {
-            .dashboard-sidebar {
-                transform: translateX(-100%);
-            }
-
-            .dashboard-sidebar.mobile-visible {
-                transform: translateX(0);
-            }
-
-            .dashboard-content {
-                margin-left: 0;
-            }
-        }
-
-        .stats-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .stats-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: linear-gradient(45deg, #00f3ff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        /* Mobile Menu Overlay */
+        .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; }
+        .mobile-overlay.active { display: block; }
     </style>
 </head>
-<body>
-    <!-- Animated Background Particles -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Floating Organic Shapes -->
-    <div class="floating-shape" style="width: 300px; height: 300px; background: #ff6b6b; top: 10%; left: 5%;"></div>
-    <div class="floating-shape" style="width: 400px; height: 400px; background: #4ecdc4; top: 50%; right: 10%; animation-delay: 3s;"></div>
-    <div class="floating-shape" style="width: 250px; height: 250px; background: #45b7d1; bottom: 10%; left: 50%; animation-delay: 6s;"></div>
+<body class="bg-gray-50">
 
     <!-- Login Screen -->
-    <div id="loginScreen" class="login-container relative z-10">
-        <div class="login-card glass rounded-3xl p-8 neon-border">
+    <div id="loginScreen" class="min-h-screen gradient-bg flex items-center justify-center p-4">
+        <div class="glass rounded-3xl p-8 max-w-md w-full animate-slide-in">
             <div class="text-center mb-8">
-                <div class="w-20 h-20 gradient-animate rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-graduation-cap text-4xl"></i>
+                <div class="w-20 h-20 mx-auto mb-4 bg-white rounded-full flex items-center justify-center animate-float">
+                    <i class="fas fa-graduation-cap text-4xl text-purple-600"></i>
                 </div>
-                <h1 class="text-3xl font-bold neon-text mb-2">Bienvenido</h1>
-                <p class="text-gray-300">Liceo Bicentenario San Nicolás</p>
+                <h1 class="text-3xl font-bold text-white mb-2">Liceo San Nicolás</h1>
+                <p class="text-white/80">Departamento de Historia y Geografía</p>
             </div>
 
-            <div class="role-selector">
-                <div class="role-card" id="studentRole" onclick="selectRole('student')">
-                    <i class="fas fa-user-graduate"></i>
-                    <p class="font-semibold">Alumno</p>
-                </div>
-                <div class="role-card" id="teacherRole" onclick="selectRole('teacher')">
-                    <i class="fas fa-chalkboard-teacher"></i>
-                    <p class="font-semibold">Profesor</p>
+            <div class="mb-6">
+                <label class="block text-white mb-2 font-semibold">Selecciona tu rol</label>
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="selectRole('student')" id="roleStudent" class="role-btn p-4 rounded-xl bg-white/20 hover:bg-white/30 transition text-white">
+                        <i class="fas fa-user-graduate text-2xl mb-2"></i>
+                        <div class="font-semibold">Alumno</div>
+                    </button>
+                    <button onclick="selectRole('teacher')" id="roleTeacher" class="role-btn p-4 rounded-xl bg-white/20 hover:bg-white/30 transition text-white">
+                        <i class="fas fa-chalkboard-teacher text-2xl mb-2"></i>
+                        <div class="font-semibold">Profesor</div>
+                    </button>
                 </div>
             </div>
 
             <form onsubmit="login(event)" class="space-y-4">
                 <div>
-                    <label class="block text-sm mb-2 text-gray-300">Usuario</label>
-                    <input type="text" id="username" class="input-field" placeholder="Ingresa tu usuario" required>
+                    <label class="block text-white mb-2">Usuario</label>
+                    <input type="text" id="username" required class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ingresa tu usuario">
                 </div>
                 <div>
-                    <label class="block text-sm mb-2 text-gray-300">Contraseña</label>
-                    <input type="password" id="password" class="input-field" placeholder="Ingresa tu contraseña" required>
+                    <label class="block text-white mb-2">Contraseña</label>
+                    <input type="password" id="password" required class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Ingresa tu contraseña">
                 </div>
-                <button type="submit" class="btn-primary mt-6">
-                    <i class="fas fa-sign-in-alt mr-2"></i>Iniciar Sesión
+                <button type="submit" class="w-full py-3 bg-white text-purple-600 rounded-xl font-bold hover:bg-white/90 transition animate-pulse-glow">
+                    Iniciar Sesión
                 </button>
             </form>
 
-            <p class="text-center text-sm text-gray-400 mt-6">
-                Demo: usa cualquier usuario/contraseña
-            </p>
+            <p class="text-center text-white/60 text-sm mt-4">Demo: Cualquier credencial funciona</p>
         </div>
     </div>
 
-    <!-- Dashboard (Hidden by default) -->
-    <div id="dashboardScreen" class="hidden">
+    <!-- Mobile Overlay -->
+    <div id="mobileOverlay" class="mobile-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="hidden">
         <!-- Sidebar -->
-        <div class="dashboard-sidebar" id="sidebar">
-            <div class="mb-8">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
-                        <i class="fas fa-user text-xl"></i>
+        <aside id="sidebar" class="sidebar fixed left-0 top-0 h-full w-64 bg-white shadow-xl z-50 sidebar-closed md:sidebar-open">
+            <div class="p-6 gradient-bg">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-purple-600"></i>
+                        </div>
+                        <div class="text-white">
+                            <div class="font-bold" id="userNameDisplay">Usuario</div>
+                            <div class="text-xs opacity-80" id="userRoleDisplay">Alumno</div>
+                        </div>
                     </div>
-                    <div>
-                        <p class="font-bold" id="userNameDisplay">Usuario</p>
-                        <p class="text-xs text-gray-400" id="userRoleDisplay">Rol</p>
-                    </div>
+                    <button onclick="toggleSidebar()" class="md:hidden text-white">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
                 </div>
             </div>
 
-            <nav>
-                <div class="sidebar-menu-item active" onclick="showDashboardSection('overview')">
-                    <i class="fas fa-home"></i>
+            <nav class="p-4">
+                <button onclick="showSection('overview')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-purple-50 transition flex items-center space-x-3 mb-2">
+                    <i class="fas fa-home text-purple-600"></i>
                     <span>Inicio</span>
-                </div>
-                <div class="sidebar-menu-item" onclick="showDashboardSection('subjects')">
-                    <i class="fas fa-book"></i>
+                </button>
+                <button onclick="showSection('subjects')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-purple-50 transition flex items-center space-x-3 mb-2">
+                    <i class="fas fa-book text-purple-600"></i>
                     <span>Materias</span>
-                </div>
-                <div class="sidebar-menu-item" onclick="showDashboardSection('enrolled')">
-                    <i class="fas fa-check-circle"></i>
+                </button>
+                <button onclick="showSection('enrollments')" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-purple-50 transition flex items-center space-x-3 mb-2">
+                    <i class="fas fa-bookmark text-purple-600"></i>
                     <span>Mis Inscripciones</span>
-                </div>
-                <div class="sidebar-menu-item" onclick="showDashboardSection('content')">
-                    <i class="fas fa-folder-open"></i>
-                    <span>Contenido</span>
-                </div>
-                <div class="sidebar-menu-item" id="teacherOnlyMenu" style="display: none;" onclick="showDashboardSection('students')">
-                    <i class="fas fa-users"></i>
+                </button>
+                <button onclick="showSection('students')" id="studentsBtn" class="nav-item w-full text-left px-4 py-3 rounded-lg hover:bg-purple-50 transition flex items-center space-x-3 mb-2 hidden">
+                    <i class="fas fa-users text-purple-600"></i>
                     <span>Estudiantes</span>
-                </div>
-                <div class="sidebar-menu-item" onclick="logout()">
+                </button>
+                <button onclick="logout()" class="w-full text-left px-4 py-3 rounded-lg hover:bg-red-50 transition flex items-center space-x-3 text-red-600 mt-8">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Cerrar Sesión</span>
-                </div>
+                </button>
             </nav>
-        </div>
+        </aside>
 
         <!-- Main Content -->
-        <div class="dashboard-content relative z-10">
-            <!-- Mobile Menu Toggle -->
-            <button class="md:hidden fixed top-4 left-4 z-50 glass p-3 rounded-lg" onclick="toggleSidebar()">
-                <i class="fas fa-bars"></i>
-            </button>
-
-            <!-- Overview Section -->
-            <div id="overviewSection" class="dashboard-section">
-                <h2 class="text-4xl font-bold mb-8 neon-text">
-                    <i class="fas fa-home mr-3"></i>Panel de Control
-                </h2>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="stats-card card-3d">
-                        <i class="fas fa-book text-3xl text-blue-400 mb-3"></i>
-                        <div class="stats-number" id="totalSubjects">0</div>
-                        <p class="text-gray-300">Materias Disponibles</p>
-                    </div>
-                    <div class="stats-card card-3d">
-                        <i class="fas fa-check-circle text-3xl text-green-400 mb-3"></i>
-                        <div class="stats-number" id="enrolledCount">0</div>
-                        <p class="text-gray-300">Inscripciones</p>
-                    </div>
-                    <div class="stats-card card-3d">
-                        <i class="fas fa-trophy text-3xl text-yellow-400 mb-3"></i>
-                        <div class="stats-number">100</div>
-                        <p class="text-gray-300">% Progreso</p>
-                    </div>
+        <main class="md:ml-64 min-h-screen bg-gray-50">
+            <!-- Header -->
+            <header class="bg-white shadow-sm sticky top-0 z-30">
+                <div class="px-4 py-4 flex items-center justify-between">
+                    <button onclick="toggleSidebar()" class="md:hidden text-gray-600">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <h2 id="sectionTitle" class="text-xl font-bold text-gray-800">Dashboard</h2>
+                    <div class="w-8"></div>
                 </div>
+            </header>
 
-                <div class="glass rounded-3xl p-8">
-                    <h3 class="text-2xl font-bold mb-6">
-                        <i class="fas fa-star mr-2"></i>Acceso Rápido
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="subject-card" onclick="showDashboardSection('subjects')">
-                            <i class="fas fa-globe text-3xl text-blue-400 mb-3"></i>
-                            <h4 class="font-bold text-lg mb-2">Explorar Materias</h4>
-                            <p class="text-sm text-gray-400">Descubre todas las materias disponibles</p>
+            <!-- Content Sections -->
+            <div class="p-4 md:p-8">
+                <!-- Overview Section -->
+                <section id="overviewSection" class="section-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover-lift">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-book text-purple-600 text-xl"></i>
+                                </div>
+                                <span class="text-3xl font-bold gradient-text" id="totalSubjects">12</span>
+                            </div>
+                            <h3 class="text-gray-600 font-semibold">Materias Disponibles</h3>
                         </div>
-                        <div class="subject-card" onclick="showDashboardSection('enrolled')">
-                            <i class="fas fa-bookmark text-3xl text-green-400 mb-3"></i>
-                            <h4 class="font-bold text-lg mb-2">Mis Inscripciones</h4>
-                            <p class="text-sm text-gray-400">Ver materias en las que estás inscrito</p>
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover-lift">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-bookmark text-blue-600 text-xl"></i>
+                                </div>
+                                <span class="text-3xl font-bold text-blue-600" id="enrolledCount">0</span>
+                            </div>
+                            <h3 class="text-gray-600 font-semibold">Mis Inscripciones</h3>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 shadow-lg hover-lift">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                                </div>
+                                <span class="text-3xl font-bold text-green-600">85%</span>
+                            </div>
+                            <h3 class="text-gray-600 font-semibold">Progreso General</h3>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Subjects Section -->
-            <div id="subjectsSection" class="dashboard-section hidden">
-                <h2 class="text-4xl font-bold mb-8 neon-text">
-                    <i class="fas fa-book mr-3"></i>Materias Disponibles
-                </h2>
-
-                <!-- Geogo -->
-                <div class="glass rounded-3xl p-8 mb-8">
-                    <h3 class="text-3xl font-bold mb-6">
-                        <i class="fas fa-globe mr-3"></i>Geogo
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="subject-card" data-subject="geogo-1">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h4 class="text-xl font-bold mb-2">Geogo 1° Año</h4>
-                                    <span class="badge badge-info">1° Año</span>
-                                </div>
-                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geogo-1')">
-                                    <i class="fas fa-plus mr-2"></i>Inscribirse
-                                </button>
-                            </div>
-                            <p class="text-sm text-gray-400 mb-3">Física, Programación, Diseño 3D, Electrónica</p>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="badge badge-warning"><i class="fas fa-atom mr-1"></i>Física</span>
-                                <span class="badge badge-warning"><i class="fas fa-code mr-1"></i>Programación</span>
-                                <span class="badge badge-warning"><i class="fas fa-cube mr-1"></i>Diseño 3D</span>
-                            </div>
-                        </div>
-
-                        <div class="subject-card" data-subject="geogo-2">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h4 class="text-xl font-bold mb-2">Geogo 2° Año</h4>
-                                    <span class="badge badge-info">2° Año</span>
-                                </div>
-                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geogo-2')">
-                                    <i class="fas fa-plus mr-2"></i>Inscribirse
-                                </button>
-                            </div>
-                            <p class="text-sm text-gray-400 mb-3">IoT, Drones, Programación Avanzada</p>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="badge badge-warning"><i class="fas fa-network-wired mr-1"></i>IoT</span>
-                                <span class="badge badge-warning"><i class="fas fa-drone mr-1"></i>Drones</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Geomática -->
-                <div class="glass rounded-3xl p-8 mb-8">
-                    <h3 class="text-3xl font-bold mb-6">
-                        <i class="fas fa-drone mr-3"></i>Geomática
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="subject-card" data-subject="geomatica-3">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h4 class="text-xl font-bold mb-2">Geomática 3° Año</h4>
-                                    <span class="badge badge-info">3° Año</span>
-                                </div>
-                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geomatica-3')">
-                                    <i class="fas fa-plus mr-2"></i>Inscribirse
-                                </button>
-                            </div>
-                            <p class="text-sm text-gray-400 mb-3">Certificaciones DGAC/SAG, Operación de Drones</p>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="badge badge-warning"><i class="fas fa-certificate mr-1"></i>DGAC</span>
-                                <span class="badge badge-warning"><i class="fas fa-leaf mr-1"></i>SAG</span>
-                            </div>
-                        </div>
-
-                        <div class="subject-card" data-subject="geomatica-4">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h4 class="text-xl font-bold mb-2">Geomática 4° Año</h4>
-                                    <span class="badge badge-info">4° Año</span>
-                                </div>
-                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('geomatica-4')">
-                                    <i class="fas fa-plus mr-2"></i>Inscribirse
-                                </button>
-                            </div>
-                            <p class="text-sm text-gray-400 mb-3">Full Stack Drone Operator Avanzado</p>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="badge badge-warning"><i class="fas fa-rocket mr-1"></i>Avanzado</span>
-                                <span class="badge badge-warning"><i class="fas fa-brain mr-1"></i>Procesamiento</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Historia -->
-                <div class="glass rounded-3xl p-8">
-                    <h3 class="text-3xl font-bold mb-6">
-                        <i class="fas fa-landmark mr-3"></i>Historia
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="subject-card" data-subject="historia-general">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <h4 class="text-xl font-bold mb-2">Historia General</h4>
-                                    <span class="badge badge-info">Todos los años</span>
-                                </div>
-                                <button class="enroll-btn btn-primary px-4 py-2 text-sm" onclick="toggleEnrollment('historia-general')">
-                                    <i class="fas fa-plus mr-2"></i>Inscribirse
-                                </button>
-                            </div>
-                            <p class="text-sm text-gray-400 mb-3">Historia Universal y de Chile</p>
-                            <div class="flex gap-2 flex-wrap">
-                                <span class="badge badge-warning"><i class="fas fa-globe-americas mr-1"></i>Universal</span>
-                                <span class="badge badge-warning"><i class="fas fa-flag mr-1"></i>Chile</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Enrolled Section -->
-            <div id="enrolledSection" class="dashboard-section hidden">
-                <h2 class="text-4xl font-bold mb-8 neon-text">
-                    <i class="fas fa-check-circle mr-3"></i>Mis Inscripciones
-                </h2>
-                <div id="enrolledList" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="glass rounded-3xl p-8 text-center">
-                        <i class="fas fa-inbox text-6xl text-gray-600 mb-4"></i>
-                        <p class="text-gray-400">No tienes inscripciones aún</p>
-                        <button class="btn-primary mt-4 inline-block" onclick="showDashboardSection('subjects')">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h3 class="text-xl font-bold mb-4">Bienvenido al Sistema</h3>
+                        <p class="text-gray-600 mb-4">Explora las materias disponibles y comienza tu aprendizaje en Historia, Geogo y Geomática.</p>
+                        <button onclick="showSection('subjects')" class="px-6 py-3 gradient-bg text-white rounded-xl font-semibold hover:opacity-90 transition">
                             Explorar Materias
                         </button>
                     </div>
-                </div>
-            </div>
+                </section>
 
-            <!-- Content Section -->
-            <div id="contentSection" class="dashboard-section hidden">
-                <h2 class="text-4xl font-bold mb-8 neon-text">
-                    <i class="fas fa-folder-open mr-3"></i>Contenido de Materias
-                </h2>
+                <!-- Subjects Section -->
+                <section id="subjectsSection" class="section-content hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="subjectsGrid"></div>
+                </section>
 
-                <div id="contentDisplay">
-                    <!-- Content will be loaded here dynamically -->
-                </div>
-            </div>
+                <!-- Enrollments Section -->
+                <section id="enrollmentsSection" class="section-content hidden">
+                    <div id="enrollmentsList"></div>
+                </section>
 
-            <!-- Students Section (Teacher Only) -->
-            <div id="studentsSection" class="dashboard-section hidden">
-                <h2 class="text-4xl font-bold mb-8 neon-text">
-                    <i class="fas fa-users mr-3"></i>Gestión de Estudiantes
-                </h2>
+                <!-- Content View Section -->
+                <section id="contentSection" class="section-content hidden">
+                    <button onclick="showSection('enrollments')" class="mb-6 text-purple-600 hover:text-purple-700 flex items-center space-x-2">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Volver a Mis Inscripciones</span>
+                    </button>
+                    <div id="contentDisplay"></div>
+                </section>
 
-                <div class="glass rounded-3xl p-8">
-                    <h3 class="text-2xl font-bold mb-6">Lista de Estudiantes</h3>
-                    <div class="space-y-4">
-                        <div class="subject-card flex justify-between items-center">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div>
-                                    <p class="font-bold">Juan Pérez</p>
-                                    <p class="text-sm text-gray-400">Geogo 1° Año, Geomática 3° Año</p>
-                                </div>
-                            </div>
-                            <span class="badge badge-success">Activo</span>
-                        </div>
-                        <div class="subject-card flex justify-between items-center">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div>
-                                    <p class="font-bold">María González</p>
-                                    <p class="text-sm text-gray-400">Geogo 2° Año, Historia General</p>
-                                </div>
-                            </div>
-                            <span class="badge badge-success">Activo</span>
+                <!-- Students Section (Teacher Only) -->
+                <section id="studentsSection" class="section-content hidden">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h3 class="text-xl font-bold mb-4">Lista de Estudiantes</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="text-left py-3 px-4">Nombre</th>
+                                        <th class="text-left py-3 px-4">Materias Inscritas</th>
+                                        <th class="text-left py-3 px-4">Progreso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">Juan Pérez</td>
+                                        <td class="py-3 px-4">3</td>
+                                        <td class="py-3 px-4"><span class="badge badge-green">85%</span></td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">María González</td>
+                                        <td class="py-3 px-4">5</td>
+                                        <td class="py-3 px-4"><span class="badge badge-green">92%</span></td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">Carlos Rodríguez</td>
+                                        <td class="py-3 px-4">2</td>
+                                        <td class="py-3 px-4"><span class="badge badge-blue">78%</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </div>
-    </div>
-
-    <!-- Scroll to Top Button -->
-    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up text-xl"></i>
+        </main>
     </div>
 
     <script>
-        // Global State
-        let currentUser = null;
-        let enrolledSubjects = [];
-
-        // Subject Content Data
-        const subjectContent = {
-            'geogo-1': {
-                title: 'Geogo 1° Año',
-                icon: 'fa-globe',
-                modules: [
-                    {
-                        name: 'Física',
-                        icon: 'fa-atom',
-                        topics: ['Introducción a la física', 'Cinemática y movimiento', 'Fuerzas y leyes de Newton', 'Energía y trabajo', 'Ondas y sonido', 'Óptica básica']
-                    },
-                    {
-                        name: 'Programación',
-                        icon: 'fa-code',
-                        topics: ['Introducción a la programación', 'Algoritmos y lógica', 'Variables y tipos de datos', 'Estructuras de control', 'Funciones básicas', 'Proyectos simples en Python/Scratch']
-                    },
-                    {
-                        name: 'Diseño 3D',
-                        icon: 'fa-cube',
-                        topics: ['Introducción al modelado 3D', 'Software de diseño (Tinkercad, Blender básico)', 'Formas geométricas básicas', 'Modificadores y transformaciones', 'Texturizado básico', 'Exportación para impresión 3D']
-                    },
-                    {
-                        name: 'Electrónica',
-                        icon: 'fa-microchip',
-                        topics: ['Conceptos básicos de electricidad', 'Componentes electrónicos', 'Circuitos simples', 'Ley de Ohm', 'Protoboard y conexiones', 'Proyectos con LEDs y resistencias']
-                    }
-                ]
-            },
-            'geogo-2': {
-                title: 'Geogo 2° Año',
-                icon: 'fa-globe',
-                modules: [
-                    {
-                        name: 'Internet de las Cosas (IoT)',
-                        icon: 'fa-network-wired',
-                        topics: ['Introducción al IoT', 'Sensores y actuadores', 'Arduino y microcontroladores', 'Conectividad (WiFi, Bluetooth)', 'Plataformas IoT (ThingSpeak, Blynk)', 'Proyectos de automatización']
-                    },
-                    {
-                        name: 'Introducción a Drones',
-                        icon: 'fa-drone',
-                        topics: ['Historia y evolución de los drones', 'Tipos de drones y aplicaciones', 'Componentes de un drone', 'Principios de vuelo', 'Seguridad y normativa básica', 'Simuladores de vuelo']
-                    },
-                    {
-                        name: 'Programación Avanzada',
-                        icon: 'fa-laptop-code',
-                        topics: ['Programación orientada a objetos', 'Estructuras de datos', 'Algoritmos de búsqueda y ordenamiento', 'Desarrollo web básico (HTML, CSS)', 'Bases de datos simples', 'Proyectos integradores']
-                    },
-                    {
-                        name: 'Diseño 3D Avanzado',
-                        icon: 'fa-cubes',
-                        topics: ['Modelado orgánico', 'Animación 3D básica', 'Renderizado y materiales', 'Diseño paramétrico', 'Impresión 3D avanzada', 'Proyectos de diseño industrial']
-                    }
-                ]
-            },
-            'geomatica-3': {
-                title: 'Geomática 3° Año',
-                icon: 'fa-drone',
-                modules: [
-                    {
-                        name: 'Certificaciones DGAC',
-                        icon: 'fa-id-card',
-                        topics: ['Preparación examen teórico DGAC', 'Normativa aeronáutica chilena', 'Espacios aéreos y restricciones', 'Meteorología aplicada', 'Procedimientos de emergencia', 'Documentación y permisos']
-                    },
-                    {
-                        name: 'Certificación SAG',
-                        icon: 'fa-leaf',
-                        topics: ['Aplicación de agroquímicos con drones', 'Normativa SAG para fumigación aérea', 'Seguridad en aplicaciones agrícolas', 'Calibración de equipos', 'Registro y trazabilidad', 'Buenas prácticas agrícolas']
-                    },
-                    {
-                        name: 'Operación de Drones',
-                        icon: 'fa-helicopter',
-                        topics: ['Vuelo manual avanzado', 'Planificación de misiones', 'Software de control (DJI, Pix4D)', 'Vuelo autónomo y waypoints', 'Captura de imágenes aéreas', 'Mantenimiento preventivo']
-                    },
-                    {
-                        name: 'Procesamiento de Datos Inicial',
-                        icon: 'fa-database',
-                        topics: ['Introducción a fotogrametría', 'Software de procesamiento (Pix4D, Agisoft)', 'Generación de ortomosaicos', 'Modelos digitales de elevación (DEM)', 'Nube de puntos básica', 'Control de calidad de datos']
-                    }
-                ]
-            },
-            'geomatica-4': {
-                title: 'Geomática 4° Año',
-                icon: 'fa-drone',
-                modules: [
-                    {
-                        name: 'Operaciones Avanzadas',
-                        icon: 'fa-rocket',
-                        topics: ['Vuelos en condiciones adversas', 'Operaciones nocturnas', 'Vuelos BVLOS (Beyond Visual Line of Sight)', 'Drones de ala fija', 'Sistemas multi-drone', 'Inspecciones técnicas especializadas']
-                    },
-                    {
-                        name: 'Procesamiento Avanzado',
-                        icon: 'fa-brain',
-                        topics: ['Fotogrametría avanzada', 'LiDAR y procesamiento de nubes de puntos', 'Análisis multispectral e hiperespectral', 'Termografía y análisis térmico', 'Machine Learning para clasificación', 'Integración con GIS profesional']
-                    },
-                    {
-                        name: 'Aplicaciones Profesionales',
-                        icon: 'fa-industry',
-                        topics: ['Agricultura de precisión', 'Topografía y catastro', 'Inspección de infraestructura', 'Minería y canteras', 'Medio ambiente y conservación', 'Emergencias y rescate']
-                    },
-                    {
-                        name: 'Gestión y Finanzas',
-                        icon: 'fa-chart-line',
-                        topics: ['Gestión de proyectos geoespaciales', 'Cotización y presupuestos', 'Costos operacionales', 'Marketing de servicios', 'Aspectos legales y seguros', 'Emprendimiento en geomática']
-                    }
-                ]
-            },
-            'historia-general': {
-                title: 'Historia General',
+        // Data Structure
+        const subjects = [
+            {
+                id: 'historia-general',
+                name: 'Historia General',
+                category: 'Historia',
+                year: 'Todos',
+                description: 'Contenido general de historia',
                 icon: 'fa-landmark',
+                color: 'blue',
                 modules: [
                     {
-                        name: 'Historia Universal',
-                        icon: 'fa-globe-americas',
-                        topics: ['Civilizaciones antiguas', 'Edad Media', 'Renacimiento', 'Revoluciones modernas', 'Guerras mundiales', 'Historia contemporánea']
-                    },
-                    {
-                        name: 'Historia de Chile',
-                        icon: 'fa-flag',
-                        topics: ['Pueblos originarios', 'Conquista y colonia', 'Independencia', 'República', 'Siglo XX', 'Chile contemporáneo']
+                        title: 'Módulo 1: Historia Antigua',
+                        topics: [
+                            {
+                                title: 'Clase 1: Civilizaciones Mesopotámicas',
+                                content: `
+                                    <h3 class="text-2xl font-bold mb-4">Civilizaciones Mesopotámicas</h3>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Introducción</h4>
+                                        <p class="text-gray-700 leading-relaxed mb-4">
+                                            Mesopotamia, conocida como "la tierra entre ríos", fue la cuna de algunas de las primeras civilizaciones humanas. 
+                                            Ubicada entre los ríos Tigris y Éufrates, esta región vio el surgimiento de sociedades complejas que desarrollaron 
+                                            la escritura, las leyes y las primeras ciudades-estado.
+                                        </p>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Principales Civilizaciones</h4>
+                                        <div class="space-y-4">
+                                            <div class="bg-purple-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">Sumerios (4500-1900 a.C.)</h5>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                                    <li>Inventores de la escritura cuneiforme</li>
+                                                    <li>Creadores del sistema sexagesimal (base 60)</li>
+                                                    <li>Construcción de zigurats (templos escalonados)</li>
+                                                    <li>Ciudades principales: Ur, Uruk, Lagash</li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="bg-blue-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">Babilonios (1900-539 a.C.)</h5>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                                    <li>Código de Hammurabi: primer código de leyes escrito</li>
+                                                    <li>Jardines Colgantes de Babilonia (una de las 7 maravillas)</li>
+                                                    <li>Avances en astronomía y matemáticas</li>
+                                                    <li>Rey más famoso: Hammurabi y Nabucodonosor II</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Legado Cultural</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="border-l-4 border-purple-500 pl-4">
+                                                <h5 class="font-bold mb-2">Escritura</h5>
+                                                <p class="text-gray-700">La escritura cuneiforme permitió registrar leyes, transacciones comerciales y literatura épica como el Poema de Gilgamesh.</p>
+                                            </div>
+                                            <div class="border-l-4 border-blue-500 pl-4">
+                                                <h5 class="font-bold mb-2">Arquitectura</h5>
+                                                <p class="text-gray-700">Los zigurats eran estructuras monumentales que servían como templos y centros administrativos.</p>
+                                            </div>
+                                            <div class="border-l-4 border-green-500 pl-4">
+                                                <h5 class="font-bold mb-2">Derecho</h5>
+                                                <p class="text-gray-700">El Código de Hammurabi estableció principios de justicia como "ojo por ojo".</p>
+                                            </div>
+                                            <div class="border-l-4 border-yellow-500 pl-4">
+                                                <h5 class="font-bold mb-2">Ciencia</h5>
+                                                <p class="text-gray-700">Desarrollaron el calendario lunar, la división del día en 24 horas y el círculo en 360 grados.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-gray-100 p-6 rounded-lg">
+                                        <h4 class="text-xl font-semibold mb-3">Actividad de Aprendizaje</h4>
+                                        <p class="text-gray-700 mb-3">Investiga y responde:</p>
+                                        <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                                            <li>¿Por qué la escritura cuneiforme fue tan importante para el desarrollo de estas civilizaciones?</li>
+                                            <li>Compara el Código de Hammurabi con las leyes actuales. ¿Qué similitudes y diferencias encuentras?</li>
+                                            <li>¿Cómo influyó la geografía de Mesopotamia en el desarrollo de estas civilizaciones?</li>
+                                        </ol>
+                                    </div>
+
+                                    <div class="mt-6">
+                                        <div class="media-placeholder bg-gray-200 rounded-lg p-8 text-center">
+                                            <i class="fas fa-video text-4xl text-gray-400 mb-2"></i>
+                                            <p class="text-gray-500">Video: Documental sobre Mesopotamia</p>
+                                            <p class="text-sm text-gray-400">(Placeholder - Agregar URL de video)</p>
+                                        </div>
+                                    </div>
+                                `
+                            }
+                        ]
                     }
                 ]
-            }
-        };
+            },
+            {
+                id: 'geogo-1',
+                name: 'Geogo 1° Año',
+                category: 'Geogo',
+                year: '1°',
+                description: 'Introducción a Física, Programación, Diseño 3D',
+                icon: 'fa-rocket',
+                color: 'purple',
+                modules: [
+                    {
+                        title: 'Módulo 1: Física Básica',
+                        topics: [
+                            {
+                                title: 'Clase 1: Introducción a la Física',
+                                content: `
+                                    <h3 class="text-2xl font-bold mb-4">Introducción a la Física</h3>
 
-        // Create Particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = Math.random() * 5 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">¿Qué es la Física?</h4>
+                                        <p class="text-gray-700 leading-relaxed mb-4">
+                                            La física es la ciencia que estudia las propiedades de la materia, la energía, el tiempo y el espacio, 
+                                            así como las interacciones entre ellos. Es fundamental para entender cómo funciona el mundo que nos rodea, 
+                                            desde el movimiento de los planetas hasta el funcionamiento de los drones.
+                                        </p>
+                                    </div>
 
-        // Role Selection
-        let selectedRole = null;
-        function selectRole(role) {
-            selectedRole = role;
-            document.getElementById('studentRole').classList.remove('selected');
-            document.getElementById('teacherRole').classList.remove('selected');
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Conceptos Fundamentales</h4>
 
-            if (role === 'student') {
-                document.getElementById('studentRole').classList.add('selected');
-            } else {
-                document.getElementById('teacherRole').classList.add('selected');
-            }
-        }
+                                        <div class="space-y-4">
+                                            <div class="bg-purple-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">1. Movimiento</h5>
+                                                <p class="text-gray-700 mb-2">El cambio de posición de un objeto con respecto al tiempo.</p>
+                                                <div class="bg-white p-3 rounded">
+                                                    <p class="font-mono text-sm">Velocidad = Distancia / Tiempo</p>
+                                                    <p class="font-mono text-sm">v = d / t</p>
+                                                </div>
+                                            </div>
 
-        // Login
-        function login(event) {
-            event.preventDefault();
+                                            <div class="bg-blue-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">2. Fuerza</h5>
+                                                <p class="text-gray-700 mb-2">Una interacción que puede cambiar el movimiento de un objeto.</p>
+                                                <div class="bg-white p-3 rounded">
+                                                    <p class="font-mono text-sm">Fuerza = Masa × Aceleración</p>
+                                                    <p class="font-mono text-sm">F = m × a</p>
+                                                </div>
+                                            </div>
 
-            if (!selectedRole) {
-                alert('Por favor selecciona un rol (Alumno o Profesor)');
-                return;
-            }
+                                            <div class="bg-green-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">3. Energía</h5>
+                                                <p class="text-gray-700 mb-2">La capacidad de realizar trabajo o producir cambios.</p>
+                                                <ul class="list-disc list-inside text-gray-700 mt-2">
+                                                    <li>Energía Cinética: energía del movimiento</li>
+                                                    <li>Energía Potencial: energía almacenada</li>
+                                                    <li>Energía Térmica: energía del calor</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            const username = document.getElementById('username').value;
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Aplicación en Drones</h4>
+                                        <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg">
+                                            <p class="text-gray-700 mb-4">Los drones aplican estos principios físicos constantemente:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-bold mb-2">🚁 Sustentación</h5>
+                                                    <p class="text-sm text-gray-600">Las hélices generan fuerza hacia abajo, creando una fuerza de reacción hacia arriba (Tercera Ley de Newton)</p>
+                                                </div>
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-bold mb-2">⚖️ Equilibrio</h5>
+                                                    <p class="text-sm text-gray-600">Los 4 motores deben generar fuerzas equilibradas para mantener el drone estable</p>
+                                                </div>
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-bold mb-2">🔋 Energía</h5>
+                                                    <p class="text-sm text-gray-600">La batería convierte energía química en energía eléctrica para los motores</p>
+                                                </div>
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <h5 class="font-bold mb-2">📡 Inercia</h5>
+                                                    <p class="text-sm text-gray-600">Los giroscopios detectan cambios en la orientación del drone</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            currentUser = {
-                name: username,
-                role: selectedRole
-            };
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+                                        <h4 class="font-bold mb-2">💡 Experimento Práctico</h4>
+                                        <p class="text-gray-700 mb-2"><strong>Objetivo:</strong> Observar la relación entre fuerza y movimiento</p>
+                                        <ol class="list-decimal list-inside text-gray-700 space-y-1">
+                                            <li>Toma un objeto pequeño (pelota, borrador)</li>
+                                            <li>Aplica diferentes fuerzas al empujarlo</li>
+                                            <li>Observa cómo cambia su velocidad y distancia recorrida</li>
+                                            <li>Registra tus observaciones</li>
+                                        </ol>
+                                    </div>
 
-            // Save to localStorage
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            localStorage.setItem('enrolledSubjects', JSON.stringify(enrolledSubjects));
+                                    <div class="bg-gray-100 p-6 rounded-lg">
+                                        <h4 class="text-xl font-semibold mb-3">Evaluación</h4>
+                                        <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                                            <li>Define con tus propias palabras qué es la física</li>
+                                            <li>Si un drone viaja 100 metros en 5 segundos, ¿cuál es su velocidad?</li>
+                                            <li>Explica cómo se aplica la Tercera Ley de Newton en el vuelo de un drone</li>
+                                            <li>Menciona 3 tipos de energía que utiliza un drone</li>
+                                        </ol>
+                                    </div>
 
-            // Show dashboard
-            document.getElementById('loginScreen').classList.add('hidden');
-            document.getElementById('dashboardScreen').classList.remove('hidden');
+                                    <div class="mt-6">
+                                        <div class="media-placeholder bg-gray-200 rounded-lg p-8 text-center">
+                                            <i class="fas fa-video text-4xl text-gray-400 mb-2"></i>
+                                            <p class="text-gray-500">Video: Física del Vuelo de Drones</p>
+                                            <p class="text-sm text-gray-400">(Placeholder - Agregar URL de video)</p>
+                                        </div>
+                                    </div>
+                                `
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Módulo 2: Programación Básica',
+                        topics: [
+                            {
+                                title: 'Clase 1: Introducción a la Programación',
+                                content: `
+                                    <h3 class="text-2xl font-bold mb-4">Introducción a la Programación</h3>
 
-            // Update user info
-            document.getElementById('userNameDisplay').textContent = currentUser.name;
-            document.getElementById('userRoleDisplay').textContent = currentUser.role === 'student' ? 'Alumno' : 'Profesor';
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">¿Qué es Programar?</h4>
+                                        <p class="text-gray-700 leading-relaxed mb-4">
+                                            Programar es el proceso de crear instrucciones que una computadora puede entender y ejecutar. 
+                                            Es como escribir una receta de cocina, pero para máquinas. En el contexto de drones, 
+                                            la programación nos permite controlar su comportamiento y automatizar tareas.
+                                        </p>
+                                    </div>
 
-            // Show teacher menu if teacher
-            if (currentUser.role === 'teacher') {
-                document.getElementById('teacherOnlyMenu').style.display = 'flex';
-            }
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Conceptos Básicos</h4>
 
-            updateStats();
-        }
+                                        <div class="space-y-4">
+                                            <div class="bg-blue-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">Variables</h5>
+                                                <p class="text-gray-700 mb-3">Contenedores que almacenan información</p>
+                                                <div class="bg-gray-800 text-green-400 p-4 rounded font-mono text-sm">
+                                                    <div>altura = 10  # metros</div>
+                                                    <div>velocidad = 5  # m/s</div>
+                                                    <div>nombre_drone = "Falcon"</div>
+                                                </div>
+                                            </div>
 
-        // Logout
-        function logout() {
-            currentUser = null;
-            enrolledSubjects = [];
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('enrolledSubjects');
+                                            <div class="bg-purple-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">Condicionales</h5>
+                                                <p class="text-gray-700 mb-3">Tomar decisiones basadas en condiciones</p>
+                                                <div class="bg-gray-800 text-green-400 p-4 rounded font-mono text-sm">
+                                                    <div>if bateria < 20:</div>
+                                                    <div>    print("¡Batería baja! Regresar a casa")</div>
+                                                    <div>else:</div>
+                                                    <div>    print("Continuar misión")</div>
+                                                </div>
+                                            </div>
 
-            document.getElementById('loginScreen').classList.remove('hidden');
-            document.getElementById('dashboardScreen').classList.add('hidden');
+                                            <div class="bg-green-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">Bucles</h5>
+                                                <p class="text-gray-700 mb-3">Repetir acciones múltiples veces</p>
+                                                <div class="bg-gray-800 text-green-400 p-4 rounded font-mono text-sm">
+                                                    <div>for i in range(4):</div>
+                                                    <div>    print("Girando motor", i)</div>
+                                                    <div>    activar_motor(i)</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            // Reset form
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            selectedRole = null;
-            document.getElementById('studentRole').classList.remove('selected');
-            document.getElementById('teacherRole').classList.remove('selected');
-        }
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Tu Primer Programa: Control de Drone</h4>
+                                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg">
+                                            <p class="text-gray-700 mb-4">Vamos a crear un programa simple para controlar un drone:</p>
+                                            <div class="bg-gray-800 text-green-400 p-4 rounded font-mono text-sm mb-4">
+                                                <div># Programa de Control de Drone Básico</div>
+                                                <div></div>
+                                                <div>altura_actual = 0</div>
+                                                <div>altura_objetivo = 50</div>
+                                                <div></div>
+                                                <div>print("🚁 Iniciando despegue...")</div>
+                                                <div></div>
+                                                <div>while altura_actual < altura_objetivo:</div>
+                                                <div>    altura_actual += 5</div>
+                                                <div>    print(f"Altura: {altura_actual} metros")</div>
+                                                <div></div>
+                                                <div>print("✅ Altura objetivo alcanzada!")</div>
+                                                <div>print("🎯 Drone en posición de vuelo")</div>
+                                            </div>
+                                            <div class="bg-white p-4 rounded">
+                                                <p class="font-bold mb-2">Salida del programa:</p>
+                                                <div class="text-sm text-gray-700 space-y-1">
+                                                    <div>🚁 Iniciando despegue...</div>
+                                                    <div>Altura: 5 metros</div>
+                                                    <div>Altura: 10 metros</div>
+                                                    <div>Altura: 15 metros</div>
+                                                    <div>...</div>
+                                                    <div>Altura: 50 metros</div>
+                                                    <div>✅ Altura objetivo alcanzada!</div>
+                                                    <div>🎯 Drone en posición de vuelo</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-        // Toggle Enrollment
-        function toggleEnrollment(subjectId) {
-            const index = enrolledSubjects.indexOf(subjectId);
-            const card = document.querySelector(`[data-subject="${subjectId}"]`);
-            const btn = card.querySelector('.enroll-btn');
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Lenguajes de Programación</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div class="border-2 border-blue-300 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">🐍 Python</h5>
+                                                <p class="text-sm text-gray-700">Fácil de aprender, ideal para principiantes y control de drones</p>
+                                            </div>
+                                            <div class="border-2 border-orange-300 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">📱 Scratch</h5>
+                                                <p class="text-sm text-gray-700">Programación visual con bloques, perfecto para empezar</p>
+                                            </div>
+                                            <div class="border-2 border-red-300 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">⚙️ C++</h5>
+                                                <p class="text-sm text-gray-700">Más avanzado, usado en controladores de vuelo</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            if (index === -1) {
-                enrolledSubjects.push(subjectId);
-                card.classList.add('enrolled');
-                btn.innerHTML = '<i class="fas fa-check mr-2"></i>Inscrito';
-                btn.style.background = 'linear-gradient(135deg, #4ecdc4, #45b7d1)';
-            } else {
-                enrolledSubjects.splice(index, 1);
-                card.classList.remove('enrolled');
-                btn.innerHTML = '<i class="fas fa-plus mr-2"></i>Inscribirse';
-                btn.style.background = 'linear-gradient(135deg, #00f3ff, #ff00ff)';
-            }
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+                                        <h4 class="font-bold mb-2">💻 Actividad Práctica</h4>
+                                        <p class="text-gray-700 mb-2"><strong>Desafío:</strong> Modifica el programa para incluir:</p>
+                                        <ol class="list-decimal list-inside text-gray-700 space-y-1">
+                                            <li>Una verificación de batería antes del despegue</li>
+                                            <li>Un mensaje de advertencia si la altura supera los 100 metros</li>
+                                            <li>Un contador de tiempo de vuelo</li>
+                                        </ol>
+                                    </div>
 
-            localStorage.setItem('enrolledSubjects', JSON.stringify(enrolledSubjects));
-            updateStats();
-            updateEnrolledList();
-        }
+                                    <div class="bg-gray-100 p-6 rounded-lg">
+                                        <h4 class="text-xl font-semibold mb-3">Evaluación</h4>
+                                        <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                                            <li>¿Qué es una variable y para qué sirve?</li>
+                                            <li>Explica la diferencia entre un condicional (if) y un bucle (for)</li>
+                                            <li>Escribe un pseudocódigo para hacer que un drone aterrice de forma segura</li>
+                                            <li>¿Por qué es importante la programación en el control de drones?</li>
+                                        </ol>
+                                    </div>
 
-        // Update Stats
-        function updateStats() {
-            document.getElementById('totalSubjects').textContent = Object.keys(subjectContent).length;
-            document.getElementById('enrolledCount').textContent = enrolledSubjects.length;
-        }
+                                    <div class="mt-6">
+                                        <div class="media-placeholder bg-gray-200 rounded-lg p-8 text-center">
+                                            <i class="fas fa-video text-4xl text-gray-400 mb-2"></i>
+                                            <p class="text-gray-500">Video: Primeros Pasos en Python</p>
+                                            <p class="text-sm text-gray-400">(Placeholder - Agregar URL de video)</p>
+                                        </div>
+                                    </div>
+                                `
+                            }
+                        ]
+                    },
+                    {
+                        title: 'Módulo 3: Diseño 3D',
+                        topics: [
+                            {
+                                title: 'Clase 1: Introducción al Diseño 3D',
+                                content: `
+                                    <h3 class="text-2xl font-bold mb-4">Introducción al Diseño 3D</h3>
 
-        // Update Enrolled List
-        function updateEnrolledList() {
-            const container = document.getElementById('enrolledList');
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">¿Qué es el Diseño 3D?</h4>
+                                        <p class="text-gray-700 leading-relaxed mb-4">
+                                            El diseño 3D es el proceso de crear representaciones tridimensionales de objetos usando software especializado. 
+                                            En el contexto de drones, nos permite diseñar piezas personalizadas, prototipos y accesorios que luego 
+                                            podemos fabricar con impresoras 3D.
+                                        </p>
+                                    </div>
 
-            if (enrolledSubjects.length === 0) {
-                container.innerHTML = `
-                    <div class="glass rounded-3xl p-8 text-center">
-                        <i class="fas fa-inbox text-6xl text-gray-600 mb-4"></i>
-                        <p class="text-gray-400">No tienes inscripciones aún</p>
-                        <button class="btn-primary mt-4 inline-block" onclick="showDashboardSection('subjects')">
-                            Explorar Materias
-                        </button>
-                    </div>
-                `;
-                return;
-            }
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Software de Diseño 3D</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="bg-blue-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">🎨 Tinkercad</h5>
+                                                <p class="text-sm text-gray-700 mb-2">Ideal para principiantes</p>
+                                                <ul class="list-disc list-inside text-sm text-gray-600">
+                                                    <li>Interfaz simple y intuitiva</li>
+                                                    <li>Basado en navegador (online)</li>
+                                                    <li>Gratuito</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-purple-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">🔧 Fusion 360</h5>
+                                                <p class="text-sm text-gray-700 mb-2">Nivel intermedio-avanzado</p>
+                                                <ul class="list-disc list-inside text-sm text-gray-600">
+                                                    <li>Herramientas profesionales</li>
+                                                    <li>Simulación de movimientos</li>
+                                                    <li>Gratis para estudiantes</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-green-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">🦏 Blender</h5>
+                                                <p class="text-sm text-gray-700 mb-2">Diseño y animación</p>
+                                                <ul class="list-disc list-inside text-sm text-gray-600">
+                                                    <li>Open source y gratuito</li>
+                                                    <li>Muy potente</li>
+                                                    <li>Curva de aprendizaje alta</li>
+                                                </ul>
+                                            </div>
+                                            <div class="bg-orange-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">📐 SketchUp</h5>
+                                                <p class="text-sm text-gray-700 mb-2">Diseño arquitectónico</p>
+                                                <ul class="list-disc list-inside text-sm text-gray-600">
+                                                    <li>Fácil de usar</li>
+                                                    <li>Gran biblioteca de modelos</li>
+                                                    <li>Versión gratuita disponible</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            container.innerHTML = enrolledSubjects.map(subjectId => {
-                const subject = subjectContent[subjectId];
-                return `
-                    <div class="subject-card enrolled">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <h4 class="text-xl font-bold mb-2">
-                                    <i class="fas ${subject.icon} mr-2"></i>${subject.title}
-                                </h4>
-                                <span class="badge badge-success">
-                                    <i class="fas fa-check mr-1"></i>Inscrito
-                                </span>
-                            </div>
-                            <button class="btn-primary px-4 py-2 text-sm" onclick="viewSubjectContent('${subjectId}')">
-                                <i class="fas fa-eye mr-2"></i>Ver Contenido
-                            </button>
-                        </div>
-                        <p class="text-sm text-gray-400">${subject.modules.length} módulos disponibles</p>
-                    </div>
-                `;
-            }).join('');
-        }
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Conceptos Fundamentales</h4>
+                                        <div class="space-y-4">
+                                            <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg">
+                                                <h5 class="font-bold mb-2">1. Formas Primitivas</h5>
+                                                <p class="text-gray-700 mb-2">Bloques básicos de construcción:</p>
+                                                <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-center">
+                                                    <div class="bg-white p-3 rounded">
+                                                        <div class="text-2xl mb-1">📦</div>
+                                                        <div class="text-sm">Cubo</div>
+                                                    </div>
+                                                    <div class="bg-white p-3 rounded">
+                                                        <div class="text-2xl mb-1">⚪</div>
+                                                        <div class="text-sm">Esfera</div>
+                                                    </div>
+                                                    <div class="bg-white p-3 rounded">
+                                                        <div class="text-2xl mb-1">🔺</div>
+                                                        <div class="text-sm">Cilindro</div>
+                                                    </div>
+                                                    <div class="bg-white p-3 rounded">
+                                                        <div class="text-2xl mb-1">🔻</div>
+                                                        <div class="text-sm">Cono</div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-        // View Subject Content
-        function viewSubjectContent(subjectId) {
-            showDashboardSection('content');
-            const subject = subjectContent[subjectId];
-            const container = document.getElementById('contentDisplay');
+                                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                                <h5 class="font-bold mb-2">2. Operaciones Booleanas</h5>
+                                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                                    <div class="bg-white p-3 rounded">
+                                                        <p class="font-semibold text-sm mb-1">Unión ➕</p>
+                                                        <p class="text-xs text-gray-600">Combinar dos objetos en uno</p>
+                                                    </div>
+                                                    <div class="bg-white p-3 rounded">
+                                                        <p class="font-semibold text-sm mb-1">Diferencia ➖</p>
+                                                        <p class="text-xs text-gray-600">Restar un objeto de otro</p>
+                                                    </div>
+                                                    <div class="bg-white p-3 rounded">
+                                                        <p class="font-semibold text-sm mb-1">Intersección ✖️</p>
+                                                        <p class="text-xs text-gray-600">Mantener solo la parte común</p>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-            container.innerHTML = `
-                <div class="glass rounded-3xl p-8 mb-8">
-                    <h3 class="text-3xl font-bold mb-6">
-                        <i class="fas ${subject.icon} mr-3"></i>${subject.title}
-                    </h3>
+                                            <div class="bg-green-50 p-4 rounded-lg">
+                                                <h5 class="font-bold mb-2">3. Transformaciones</h5>
+                                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                                    <li><strong>Mover:</strong> Cambiar la posición del objeto</li>
+                                                    <li><strong>Rotar:</strong> Girar el objeto en diferentes ejes</li>
+                                                    <li><strong>Escalar:</strong> Cambiar el tamaño del objeto</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                    ${subject.modules.map((module, idx) => `
-                        <div class="content-block mb-6">
-                            <h4 class="text-2xl font-bold mb-4">
-                                <i class="fas ${module.icon} mr-2"></i>${module.name}
-                            </h4>
-                            <ul class="content-list">
-                                ${module.topics.map(topic => `<li>${topic}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `).join('')}
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Proyecto: Diseñar un Soporte para Cámara de Drone</h4>
+                                        <div class="bg-gradient-to-r from-purple-100 to-blue-100 p-6 rounded-lg">
+                                            <p class="text-gray-700 mb-4">Vamos a diseñar un soporte simple para montar una cámara en un drone:</p>
 
-                    <div class="grid md:grid-cols-2 gap-6 mt-8">
-                        <div class="media-placeholder">
-                            <i class="fas fa-video"></i>
-                            <h4 class="text-xl font-bold mt-3 mb-2">Video Explicativo</h4>
-                            <p class="text-gray-400">Espacio para video de ${subject.title}</p>
-                            <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
-                        </div>
-                        <div class="media-placeholder">
-                            <i class="fas fa-cube"></i>
-                            <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D Interactivo</h4>
-                            <p class="text-gray-400">Espacio para modelo 3D de ejemplo</p>
-                            <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
+                                            <div class="space-y-3">
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <p class="font-bold mb-2">Paso 1: Base</p>
+                                                    <p class="text-sm text-gray-700">Crear un cubo de 40mm x 40mm x 5mm como base del soporte</p>
+                                                </div>
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <p class="font-bold mb-2">Paso 2: Agujeros de montaje</p>
+                                                    <p class="text-sm text-gray-700">Usar cilindros de 3mm de diámetro en las esquinas (operación de diferencia)</p>
+                                                </div>
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <p class="font-bold mb-2">Paso 3: Soporte vertical</p>
+                                                    <p class="text-sm text-gray-700">Añadir un cilindro de 10mm de diámetro y 30mm de altura</p>
+                                                </div>
+                                                <div class="bg-white p-4 rounded-lg">
+                                                    <p class="font-bold mb-2">Paso 4: Pinza para cámara</p>
+                                                    <p class="text-sm text-gray-700">Crear una forma en U para sujetar la cámara</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-        // Show Dashboard Section
-        function showDashboardSection(section) {
-            const sections = ['overview', 'subjects', 'enrolled', 'content', 'students'];
-            sections.forEach(s => {
-                const el = document.getElementById(s + 'Section');
-                if (el) {
-                    el.classList.add('hidden');
-                }
-            });
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-purple-600">Aplicaciones en Drones</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div class="border-l-4 border-blue-500 pl-4">
+                                                <h5 class="font-bold mb-2">Piezas de Repuesto</h5>
+                                                <p class="text-sm text-gray-700">Diseñar e imprimir hélices, soportes y protectores personalizados</p>
+                                            </div>
+                                            <div class="border-l-4 border-purple-500 pl-4">
+                                                <h5 class="font-bold mb-2">Accesorios</h5>
+                                                <p class="text-sm text-gray-700">Crear monturas para cámaras, sensores y sistemas de iluminación</p>
+                                            </div>
+                                            <div class="border-l-4 border-green-500 pl-4">
+                                                <h5 class="font-bold mb-2">Prototipos</h5>
+                                                <p class="text-sm text-gray-700">Diseñar y probar nuevos diseños de drones antes de la fabricación final</p>
+                                            </div>
+                                            <div class="border-l-4 border-orange-500 pl-4">
+                                                <h5 class="font-bold mb-2">Personalización</h5>
+                                                <p class="text-sm text-gray-700">Añadir elementos únicos y distintivos a tu drone</p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-            document.getElementById(section + 'Section').classList.remove('hidden');
+                                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+                                        <h4 class="font-bold mb-2">🎯 Actividad Práctica</h4>
+                                        <p class="text-gray-700 mb-2"><strong>Desafío:</strong> Diseña tu primera pieza</p>
+                                        <ol class="list-decimal list-inside text-gray-700 space-y-1">
+                                            <li>Abre Tinkercad (www.tinkercad.com)</li>
+                                            <li>Crea una cuenta gratuita</li>
+                                            <li>Diseña un protector de hélice simple usando formas básicas</li>
+                                            <li>Exporta tu diseño como archivo STL</li>
+                                        </ol>
+                                    </div>
 
-            // Update active menu item
-            document.querySelectorAll('.sidebar-menu-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.closest('.sidebar-menu-item').classList.add('active');
+                                    <div class="bg-gray-100 p-6 rounded-lg">
+                                        <h4 class="text-xl font-semibold mb-3">Evaluación</h4>
+                                        <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                                            <li>¿Qué son las formas primitivas en diseño 3D?</li>
+                                            <li>Explica qué es una operación booleana de "diferencia" y da un ejemplo</li>
+                                            <li>Menciona 3 aplicaciones del diseño 3D en drones</li>
+                                            <li>¿Qué software recomendarías para un principiante y por qué?</li>
+                                        </ol>
+                                    </div>
 
-            // Update enrolled list if viewing enrolled section
-            if (section === 'enrolled') {
-                updateEnrolledList();
-            }
-        }
-
-        // Toggle Sidebar (Mobile)
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('mobile-visible');
-        }
-
-        // Scroll to Top
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Scroll Events
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.getElementById('scrollTop');
-            if (window.pageYOffset > 300) {
-                scrollTop.classList.add('visible');
-            } else {
-                scrollTop.classList.remove('visible');
-            }
-        });
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-
-            // Check if user is already logged in
-            const savedUser = localStorage.getItem('currentUser');
-            const savedEnrollments = localStorage.getItem('enrolledSubjects');
-
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                enrolledSubjects = savedEnrollments ? JSON.parse(savedEnrollments) : [];
-
-                // Auto login
-                document.getElementById('loginScreen').classList.add('hidden');
-                document.getElementById('dashboardScreen').classList.remove('hidden');
-                document.getElementById('userNameDisplay').textContent = currentUser.name;
-                document.getElementById('userRoleDisplay').textContent = currentUser.role === 'student' ? 'Alumno' : 'Profesor';
-
-                if (currentUser.role === 'teacher') {
-                    document.getElementById('teacherOnlyMenu').style.display = 'flex';
-                }
-
-                updateStats();
-
-                // Update enrollment buttons
-                enrolledSubjects.forEach(subjectId => {
-                    const card = document.querySelector(`[data-subject="${subjectId}"]`);
-                    if (card) {
-                        const btn = card.querySelector('.enroll-btn');
-                        card.classList.add('enrolled');
-                        btn.innerHTML = '<i class="fas fa-check mr-2"></i>Inscrito';
-                        btn.style.background = 'linear-gradient(135deg, #4ecdc4, #45b7d1)';
+                                    <div class="mt-6">
+                                        <div class="media-placeholder bg-gray-200 rounded-lg p-8 text-center">
+                                            <i class="fas fa-cube text-4xl text-gray-400 mb-2"></i>
+                                            <p class="text-gray-500">Modelo 3D Interactivo: Soporte de Cámara</p>
+                                            <p class="text-sm text-gray-400">(Placeholder - Agregar modelo 3D de Sketchfab)</p>
+                                        </div>
+                                    </div>
+                                `
+                            }
+                        ]
                     }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+                ]
+            },
+            {
+                id: 'geogo-2',
+                name: 'Geogo 2° Año',
+                category: 'Geogo',
+                year: '2°',
+                description: 'Electrónica, IoT y Drones',
+                icon: 'fa-microchip',
+                color: 'blue',
+                modules: [
+                    {
+                        title: 'Módulo 1: Electrónica Básica',
+                        topics: [
+                            {
+                                title: 'Clase 1: Fundamentos de Electrónica',
+                                content: `
+                                    <h3 class="text-2xl font-bold mb-4">Fundamentos de Electrónica</h3>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-blue-600">¿Qué es la Electrónica?</h4>
+                                        <p class="text-gray-700 leading-relaxed mb-4">
+                                            La electrónica es la rama de la física y la tecnología que estudia el flujo de electrones a través de 
+                                            materiales conductores y semiconductores. Es fundamental para entender cómo funcionan los drones, 
+                                            desde sus motores hasta sus sistemas de control y comunicación.
+                                        </p>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-blue-600">Conceptos Fundamentales</h4>
+
+                                        <div class="space-y-4">
+                                            <div class="bg-blue-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">⚡ Voltaje (V)</h5>
+                                                <p class="text-gray-700 mb-2">La "presión" eléctrica que impulsa a los electrones. Se mide en Voltios (V).</p>
+                                                <div class="bg-white p-3 rounded">
+                                                    <p class="text-sm text-gray-600">Analogía: Como la presión del agua en una manguera</p>
+                                                    <p class="font-mono text-sm mt-2">Batería de drone típica: 11.1V (3S LiPo)</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="bg-purple-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">🔌 Corriente (I)</h5>
+                                                <p class="text-gray-700 mb-2">El flujo de electrones. Se mide en Amperios (A).</p>
+                                                <div class="bg-white p-3 rounded">
+                                                    <p class="text-sm text-gray-600">Analogía: Como el caudal de agua que fluye</p>
+                                                    <p class="font-mono text-sm mt-2">Motor de drone: 5-30A dependiendo del tamaño</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="bg-green-50 p-4 rounded-lg">
+                                                <h5 class="font-bold text-lg mb-2">🔧 Resistencia (R)</h5>
+                                                <p class="text-gray-700 mb-2">La oposición al flujo de corriente. Se mide en Ohmios (Ω).</p>
+                                                <div class="bg-white p-3 rounded">
+                                                    <p class="text-sm text-gray-600">Analogía: Como una restricción en la manguera</p>
+                                                    <p class="font-mono text-sm mt-2">LED típico: necesita resistencia de 220Ω</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-6">
+                                        <h4 class="text-xl font-semibold mb-3 text-blue-600">Ley de Ohm</h4>
+                                        <div class="bg-gradient-to-r from-blue-100 to-purple-100 p-6 rounded-lg">
+                                            <p class="text-gray-700 mb-4">La relación fundamental entre voltaje, corriente y resistencia:</p>
