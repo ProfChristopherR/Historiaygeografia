@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departamento de Historia y Geografía - Liceo Bicentenario San Nicolás</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        /* Neon Glow */
+        .neon-text {
+            text-shadow: 0 0 10px #00f3ff, 0 0 20px #00f3ff, 0 0 30px #00f3ff;
+        }
+
+        .neon-border {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.5), 0 0 30px rgba(0, 243, 255, 0.3);
+        }
+
+        /* 3D Card Hover */
+        .card-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px rgba(0, 243, 255, 0.3);
+        }
+
+        /* Animated Gradient */
+        .gradient-animate {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f7b731);
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Shapes */
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: floatShape 15s infinite ease-in-out;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00f3ff, #ff00ff);
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        /* Animated Timeline */
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateX(-50px);
+            animation: slideIn 0.6s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #00f3ff, #ff00ff);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.8);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background: linear-gradient(180deg, rgba(0, 243, 255, 0.5), transparent);
+        }
+
+        /* Accordion */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Navigation Morphing */
+        .nav-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .nav-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Counter Animation */
+        .counter {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f3ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00f3ff, #ff00ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Media Placeholder Styles */
+        .media-placeholder {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .media-placeholder:hover {
+            border-color: rgba(0, 243, 255, 0.6);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .media-placeholder i {
+            font-size: 3rem;
+            color: #00f3ff;
+            margin-bottom: 15px;
+        }
+
+        /* Content Section Styles */
+        .content-block {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #00f3ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .content-block h4 {
+            color: #00f3ff;
+            margin-bottom: 10px;
+        }
+
+        .content-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .content-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #00f3ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Floating Organic Shapes -->
+    <div class="floating-shape" style="width: 300px; height: 300px; background: #ff6b6b; top: 10%; left: 5%;"></div>
+    <div class="floating-shape" style="width: 400px; height: 400px; background: #4ecdc4; top: 50%; right: 10%; animation-delay: 3s;"></div>
+    <div class="floating-shape" style="width: 250px; height: 250px; background: #45b7d1; bottom: 10%; left: 50%; animation-delay: 6s;"></div>
+
+    <!-- Navigation -->
+    <nav class="glass fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 gradient-animate rounded-full flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">Liceo Bicentenario San Nicolás</h1>
+                        <p class="text-xs text-gray-300">Departamento de Historia y Geografía</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('home')">
+                        <i class="fas fa-home mr-2"></i>Inicio
+                    </button>
+                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('historia')">
+                        <i class="fas fa-landmark mr-2"></i>Historia
+                    </button>
+                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('geogo')">
+                        <i class="fas fa-globe mr-2"></i>Geogo
+                    </button>
+                    <button class="nav-btn px-6 py-2 rounded-full glass hover:neon-border transition-all relative z-10" onclick="showSection('geomatica')">
+                        <i class="fas fa-drone mr-2"></i>Geomática
+                    </button>
+                </div>
+                <button class="md:hidden" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full glass z-40 hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-6">
+            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('home'); toggleMobileMenu()">
+                <i class="fas fa-home mr-2"></i>Inicio
+            </button>
+            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('historia'); toggleMobileMenu()">
+                <i class="fas fa-landmark mr-2"></i>Historia
+            </button>
+            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('geogo'); toggleMobileMenu()">
+                <i class="fas fa-globe mr-2"></i>Geogo
+            </button>
+            <button class="nav-btn px-8 py-3 rounded-full glass text-xl" onclick="showSection('geomatica'); toggleMobileMenu()">
+                <i class="fas fa-drone mr-2"></i>Geomática
+            </button>
+        </div>
+    </div>
+
+    <div class="relative z-10 pt-24">
+        <!-- Home Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center px-6">
+            <div class="container mx-auto text-center">
+                <div class="glass rounded-3xl p-12 max-w-5xl mx-auto neon-border">
+                    <h1 class="text-6xl md:text-8xl font-black mb-6 neon-text">
+                        Historia y Geografía
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-gray-300">
+                        Explorando el pasado, presente y futuro con tecnología de vanguardia
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                        <div class="glass rounded-2xl p-6 card-3d">
+                            <div class="counter" data-target="3">0</div>
+                            <p class="text-lg mt-2">Especialidades</p>
+                        </div>
+                        <div class="glass rounded-2xl p-6 card-3d">
+                            <div class="counter" data-target="4">0</div>
+                            <p class="text-lg mt-2">Años de Formación</p>
+                        </div>
+                        <div class="glass rounded-2xl p-6 card-3d">
+                            <div class="counter" data-target="100">0</div>
+                            <p class="text-lg mt-2">% Innovación</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Historia Section -->
+        <section id="historia" class="min-h-screen py-20 px-6 hidden">
+            <div class="container mx-auto">
+                <h2 class="text-5xl font-black mb-12 text-center neon-text">
+                    <i class="fas fa-landmark mr-4"></i>Historia
+                </h2>
+                <div class="glass rounded-3xl p-8 max-w-6xl mx-auto">
+                    <p class="text-xl text-center text-gray-300 mb-8">
+                        Contenido de Historia en desarrollo...
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geogo Section -->
+        <section id="geogo" class="min-h-screen py-20 px-6 hidden">
+            <div class="container mx-auto">
+                <h2 class="text-5xl font-black mb-12 text-center neon-text">
+                    <i class="fas fa-globe mr-4"></i>Geogo
+                </h2>
+
+                <!-- Geogo 1° Año -->
+                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
+                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geogo1')">
+                        <h3 class="text-3xl font-bold">
+                            <span class="gradient-animate px-4 py-2 rounded-full">1° Año</span>
+                        </h3>
+                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geogo1-icon"></i>
+                    </div>
+                    <div class="accordion-content" id="geogo1">
+                        <div class="grid md:grid-cols-2 gap-6 mt-6">
+                            <!-- Física -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-atom mr-2"></i>Física</h4>
+                                <ul class="content-list">
+                                    <li>Introducción a la física</li>
+                                    <li>Cinemática y movimiento</li>
+                                    <li>Fuerzas y leyes de Newton</li>
+                                    <li>Energía y trabajo</li>
+                                    <li>Ondas y sonido</li>
+                                    <li>Óptica básica</li>
+                                </ul>
+                            </div>
+
+                            <!-- Programación -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-code mr-2"></i>Programación</h4>
+                                <ul class="content-list">
+                                    <li>Introducción a la programación</li>
+                                    <li>Algoritmos y lógica</li>
+                                    <li>Variables y tipos de datos</li>
+                                    <li>Estructuras de control</li>
+                                    <li>Funciones básicas</li>
+                                    <li>Proyectos simples en Python/Scratch</li>
+                                </ul>
+                            </div>
+
+                            <!-- Diseño 3D -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-cube mr-2"></i>Diseño 3D</h4>
+                                <ul class="content-list">
+                                    <li>Introducción al modelado 3D</li>
+                                    <li>Software de diseño (Tinkercad, Blender básico)</li>
+                                    <li>Formas geométricas básicas</li>
+                                    <li>Modificadores y transformaciones</li>
+                                    <li>Texturizado básico</li>
+                                    <li>Exportación para impresión 3D</li>
+                                </ul>
+                            </div>
+
+                            <!-- Electrónica -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-microchip mr-2"></i>Electrónica</h4>
+                                <ul class="content-list">
+                                    <li>Conceptos básicos de electricidad</li>
+                                    <li>Componentes electrónicos</li>
+                                    <li>Circuitos simples</li>
+                                    <li>Ley de Ohm</li>
+                                    <li>Protoboard y conexiones</li>
+                                    <li>Proyectos con LEDs y resistencias</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Media Placeholders -->
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="media-placeholder">
+                                <i class="fas fa-video"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Video Explicativo</h4>
+                                <p class="text-gray-400">Espacio para video de introducción a Geogo 1° Año</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
+                            </div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-cube"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D Interactivo</h4>
+                                <p class="text-gray-400">Espacio para modelo 3D de ejemplo</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geogo 2° Año -->
+                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
+                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geogo2')">
+                        <h3 class="text-3xl font-bold">
+                            <span class="gradient-animate px-4 py-2 rounded-full">2° Año</span>
+                        </h3>
+                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geogo2-icon"></i>
+                    </div>
+                    <div class="accordion-content" id="geogo2">
+                        <div class="grid md:grid-cols-2 gap-6 mt-6">
+                            <!-- IoT -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-network-wired mr-2"></i>Internet de las Cosas (IoT)</h4>
+                                <ul class="content-list">
+                                    <li>Introducción al IoT</li>
+                                    <li>Sensores y actuadores</li>
+                                    <li>Arduino y microcontroladores</li>
+                                    <li>Conectividad (WiFi, Bluetooth)</li>
+                                    <li>Plataformas IoT (ThingSpeak, Blynk)</li>
+                                    <li>Proyectos de automatización</li>
+                                </ul>
+                            </div>
+
+                            <!-- Drones -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-drone mr-2"></i>Introducción a Drones</h4>
+                                <ul class="content-list">
+                                    <li>Historia y evolución de los drones</li>
+                                    <li>Tipos de drones y aplicaciones</li>
+                                    <li>Componentes de un drone</li>
+                                    <li>Principios de vuelo</li>
+                                    <li>Seguridad y normativa básica</li>
+                                    <li>Simuladores de vuelo</li>
+                                </ul>
+                            </div>
+
+                            <!-- Programación Avanzada -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-laptop-code mr-2"></i>Programación Avanzada</h4>
+                                <ul class="content-list">
+                                    <li>Programación orientada a objetos</li>
+                                    <li>Estructuras de datos</li>
+                                    <li>Algoritmos de búsqueda y ordenamiento</li>
+                                    <li>Desarrollo web básico (HTML, CSS)</li>
+                                    <li>Bases de datos simples</li>
+                                    <li>Proyectos integradores</li>
+                                </ul>
+                            </div>
+
+                            <!-- Diseño 3D Avanzado -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-cubes mr-2"></i>Diseño 3D Avanzado</h4>
+                                <ul class="content-list">
+                                    <li>Modelado orgánico</li>
+                                    <li>Animación 3D básica</li>
+                                    <li>Renderizado y materiales</li>
+                                    <li>Diseño paramétrico</li>
+                                    <li>Impresión 3D avanzada</li>
+                                    <li>Proyectos de diseño industrial</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Media Placeholders -->
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="media-placeholder">
+                                <i class="fas fa-video"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Video Demostrativo</h4>
+                                <p class="text-gray-400">Espacio para video de proyectos IoT y Drones</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
+                            </div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-cube"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D de Drone</h4>
+                                <p class="text-gray-400">Espacio para modelo 3D interactivo de drone</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geomática Section -->
+        <section id="geomatica" class="min-h-screen py-20 px-6 hidden">
+            <div class="container mx-auto">
+                <h2 class="text-5xl font-black mb-12 text-center neon-text">
+                    <i class="fas fa-drone mr-4"></i>Geomática
+                </h2>
+
+                <!-- Geomática 3° Año -->
+                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
+                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geo3')">
+                        <h3 class="text-3xl font-bold">
+                            <span class="gradient-animate px-4 py-2 rounded-full">3° Año</span>
+                        </h3>
+                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geo3-icon"></i>
+                    </div>
+                    <div class="accordion-content" id="geo3">
+                        <div class="mb-6">
+                            <h4 class="text-2xl font-bold mb-4 text-center">
+                                <i class="fas fa-certificate mr-2"></i>Full Stack Drone Operator - Nivel Inicial
+                            </h4>
+                            <p class="text-gray-300 text-center mb-6">Formación integral en operación de drones y procesamiento de datos geoespaciales</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mt-6">
+                            <!-- Certificaciones DGAC -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-id-card mr-2"></i>Certificaciones DGAC</h4>
+                                <ul class="content-list">
+                                    <li>Preparación examen teórico DGAC</li>
+                                    <li>Normativa aeronáutica chilena</li>
+                                    <li>Espacios aéreos y restricciones</li>
+                                    <li>Meteorología aplicada</li>
+                                    <li>Procedimientos de emergencia</li>
+                                    <li>Documentación y permisos</li>
+                                </ul>
+                            </div>
+
+                            <!-- Certificación SAG -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-leaf mr-2"></i>Certificación SAG</h4>
+                                <ul class="content-list">
+                                    <li>Aplicación de agroquímicos con drones</li>
+                                    <li>Normativa SAG para fumigación aérea</li>
+                                    <li>Seguridad en aplicaciones agrícolas</li>
+                                    <li>Calibración de equipos</li>
+                                    <li>Registro y trazabilidad</li>
+                                    <li>Buenas prácticas agrícolas</li>
+                                </ul>
+                            </div>
+
+                            <!-- Operación de Drones -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-helicopter mr-2"></i>Operación de Drones</h4>
+                                <ul class="content-list">
+                                    <li>Vuelo manual avanzado</li>
+                                    <li>Planificación de misiones</li>
+                                    <li>Software de control (DJI, Pix4D)</li>
+                                    <li>Vuelo autónomo y waypoints</li>
+                                    <li>Captura de imágenes aéreas</li>
+                                    <li>Mantenimiento preventivo</li>
+                                </ul>
+                            </div>
+
+                            <!-- Procesamiento de Datos -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-database mr-2"></i>Procesamiento de Datos Inicial</h4>
+                                <ul class="content-list">
+                                    <li>Introducción a fotogrametría</li>
+                                    <li>Software de procesamiento (Pix4D, Agisoft)</li>
+                                    <li>Generación de ortomosaicos</li>
+                                    <li>Modelos digitales de elevación (DEM)</li>
+                                    <li>Nube de puntos básica</li>
+                                    <li>Control de calidad de datos</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Media Placeholders -->
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="media-placeholder">
+                                <i class="fas fa-video"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Video de Vuelo</h4>
+                                <p class="text-gray-400">Espacio para video de operación de drones</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
+                            </div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-map"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Ortomosaico Ejemplo</h4>
+                                <p class="text-gray-400">Espacio para visualización de ortomosaico</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: Imagen interactiva o visor GIS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geomática 4° Año -->
+                <div class="glass rounded-3xl p-8 mb-8 card-3d reveal">
+                    <div class="flex items-center justify-between mb-6 cursor-pointer" onclick="toggleAccordion('geo4')">
+                        <h3 class="text-3xl font-bold">
+                            <span class="gradient-animate px-4 py-2 rounded-full">4° Año</span>
+                        </h3>
+                        <i class="fas fa-chevron-down text-2xl transition-transform" id="geo4-icon"></i>
+                    </div>
+                    <div class="accordion-content" id="geo4">
+                        <div class="mb-6">
+                            <h4 class="text-2xl font-bold mb-4 text-center">
+                                <i class="fas fa-star mr-2"></i>Full Stack Drone Operator - Nivel Avanzado
+                            </h4>
+                            <p class="text-gray-300 text-center mb-6">Especialización profesional y gestión de proyectos geoespaciales</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6 mt-6">
+                            <!-- Operaciones Avanzadas -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-rocket mr-2"></i>Operaciones Avanzadas</h4>
+                                <ul class="content-list">
+                                    <li>Vuelos en condiciones adversas</li>
+                                    <li>Operaciones nocturnas</li>
+                                    <li>Vuelos BVLOS (Beyond Visual Line of Sight)</li>
+                                    <li>Drones de ala fija</li>
+                                    <li>Sistemas multi-drone</li>
+                                    <li>Inspecciones técnicas especializadas</li>
+                                </ul>
+                            </div>
+
+                            <!-- Procesamiento Avanzado -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-brain mr-2"></i>Procesamiento Avanzado</h4>
+                                <ul class="content-list">
+                                    <li>Fotogrametría avanzada</li>
+                                    <li>LiDAR y procesamiento de nubes de puntos</li>
+                                    <li>Análisis multispectral e hiperespectral</li>
+                                    <li>Termografía y análisis térmico</li>
+                                    <li>Machine Learning para clasificación</li>
+                                    <li>Integración con GIS profesional</li>
+                                </ul>
+                            </div>
+
+                            <!-- Aplicaciones Profesionales -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-industry mr-2"></i>Aplicaciones Profesionales</h4>
+                                <ul class="content-list">
+                                    <li>Agricultura de precisión</li>
+                                    <li>Topografía y catastro</li>
+                                    <li>Inspección de infraestructura</li>
+                                    <li>Minería y canteras</li>
+                                    <li>Medio ambiente y conservación</li>
+                                    <li>Emergencias y rescate</li>
+                                </ul>
+                            </div>
+
+                            <!-- Gestión y Finanzas -->
+                            <div class="content-block">
+                                <h4 class="text-2xl font-bold mb-4"><i class="fas fa-chart-line mr-2"></i>Gestión y Finanzas</h4>
+                                <ul class="content-list">
+                                    <li>Gestión de proyectos geoespaciales</li>
+                                    <li>Cotización y presupuestos</li>
+                                    <li>Costos operacionales</li>
+                                    <li>Marketing de servicios</li>
+                                    <li>Aspectos legales y seguros</li>
+                                    <li>Emprendimiento en geomática</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Proyecto Final -->
+                        <div class="mt-8 p-6 glass rounded-2xl border-2 border-purple-500">
+                            <h4 class="text-2xl font-bold mb-4 text-center">
+                                <i class="fas fa-trophy mr-2"></i>Proyecto Final Integrador
+                            </h4>
+                            <p class="text-gray-300 text-center mb-4">
+                                Los estudiantes desarrollan un proyecto completo que incluye:
+                            </p>
+                            <ul class="content-list max-w-2xl mx-auto">
+                                <li>Planificación y gestión del proyecto</li>
+                                <li>Obtención de permisos y autorizaciones</li>
+                                <li>Ejecución de vuelos y captura de datos</li>
+                                <li>Procesamiento y análisis completo</li>
+                                <li>Generación de productos finales</li>
+                                <li>Presentación profesional a cliente real</li>
+                            </ul>
+                        </div>
+
+                        <!-- Media Placeholders -->
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="media-placeholder">
+                                <i class="fas fa-video"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Portafolio de Proyectos</h4>
+                                <p class="text-gray-400">Espacio para video showcase de proyectos realizados</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: YouTube embed o video local</p>
+                            </div>
+                            <div class="media-placeholder">
+                                <i class="fas fa-cube"></i>
+                                <h4 class="text-xl font-bold mt-3 mb-2">Modelo 3D Avanzado</h4>
+                                <p class="text-gray-400">Espacio para modelo 3D de proyecto final</p>
+                                <p class="text-sm text-gray-500 mt-2">Formato: Sketchfab embed o visor 3D</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </div>
+
+    <script>
+        // Create Particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // Show Section
+        function showSection(sectionId) {
+            const sections = ['home', 'historia', 'geogo', 'geomatica'];
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                if (id === sectionId) {
+                    section.classList.remove('hidden');
+                    setTimeout(() => {
+                        section.querySelectorAll('.reveal').forEach((el, index) => {
+                            setTimeout(() => el.classList.add('active'), index * 100);
+                        });
+                    }, 100);
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+
+            if (sectionId === 'home') {
+                animateCounters();
+            }
+        }
+
+        // Toggle Accordion
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+
+            content.classList.toggle('active');
+            icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0)';
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll Events
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+
+            // Navbar background on scroll
+            const navbar = document.getElementById('navbar');
+            if (window.pageYOffset > 50) {
+                navbar.style.background = 'rgba(15, 12, 41, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.05)';
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateCounters();
+
+            // Reveal elements on scroll
+            const revealElements = () => {
+                const reveals = document.querySelectorAll('.reveal');
+                reveals.forEach(element => {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+
+                    if (elementTop < windowHeight - elementVisible) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealElements);
+            revealElements();
+        });
+    </script>
+</body>
+</html>
